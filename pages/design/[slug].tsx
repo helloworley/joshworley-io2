@@ -5,6 +5,7 @@ import Image from "next/image";
 import LabelContent from "@/components/common/LabelContent";
 import LineBreak from "@/components/common/LineBreak";
 import RenderBlock from "@/components/common/RenderBlock";
+import BlurredBackground from "@/components/layout/BlurredBackground";
 
 export default function Home({ allEntries }) {
   const router = useRouter();
@@ -42,21 +43,9 @@ export default function Home({ allEntries }) {
   );
 
   return (
-    <div className="relative h-screen">
-      {/* Background Image */}
-      <div
-        className="fixed bottom-0 left-0 right-0 top-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${pageContent.logo})` }}
-      ></div>
-
-      {/* Blurred Overlay */}
-      <div className="bg-smoke-70 fixed bottom-0 left-0 right-0 top-0 backdrop-blur-3xl"></div>
-
-      {/* Main Content */}
-      <div className="max-w-screen relative z-10">
-        <PageLayout content={content} aside={aside} />
-      </div>
-    </div>
+    <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
+      <PageLayout content={content} aside={aside} />
+    </BlurredBackground>
   );
 }
 

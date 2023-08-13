@@ -2,6 +2,7 @@ import PageLayout from "@/components/layout/PageLayout";
 import { getAllEntries } from "@/lib/notion/notion";
 import TitleDescription from "@/components/common/TitleDescription";
 import ProjectCard from "@/components/project/ProjectCard";
+import BlurredBackground from "@/components/layout/BlurredBackground";
 
 export default function Home({ allEntries }) {
   console.log("allEntries", allEntries);
@@ -27,9 +28,9 @@ export default function Home({ allEntries }) {
   );
 
   return (
-    <>
+    <BlurredBackground image="/default-background.jpeg">
       <PageLayout content={content} aside={aside} />
-    </>
+    </BlurredBackground>
   );
 }
 
