@@ -3,6 +3,8 @@ import { getAllPages } from "@/lib/notion";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import LabelContent from "@/components/common/LabelContent";
+import LineBreak from "@/components/common/LineBreak";
+import RenderBlock from "@/components/common/RenderBlock";
 
 export default function Home({ allPages }) {
   console.log("allPages", allPages);
@@ -32,6 +34,12 @@ export default function Home({ allPages }) {
       </div>
       <LabelContent label="About the Brand" content={pageContent.brand_about} />
       <LabelContent label="About the Project" content={pageContent.project_about} />
+      <LineBreak />
+      <div>
+        {pageContent.childBlocks?.map((block, i) => (
+          <RenderBlock allBlocks={pageContent.childBlocks} block={block} key={i} />
+        ))}
+      </div>
     </div>
   );
 
