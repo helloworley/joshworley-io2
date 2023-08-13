@@ -7,11 +7,9 @@ import LineBreak from "@/components/common/LineBreak";
 import RenderBlock from "@/components/common/RenderBlock";
 
 export default function Home({ allEntries }) {
-  console.log("allEntries", allEntries);
   const router = useRouter();
   const { slug } = router.query;
-  const pageContent = allEntries.filter(page => slug === page.slug)[0];
-  console.log("pageContent", pageContent);
+  const pageContent = allEntries.projects.filter(page => slug === page.slug)[0];
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
@@ -63,8 +61,8 @@ export default function Home({ allEntries }) {
 }
 
 export const getStaticPaths = async () => {
-  const designPages = await getAllEntries();
-  const paths = designPages.map(item => ({
+  const allPages = await getAllEntries();
+  const paths = allPages.projects.map(item => ({
     params: { slug: item.slug },
   }));
   return {

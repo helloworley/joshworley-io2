@@ -7,8 +7,11 @@ import { getProjects } from "./getProjects";
 import { getTechnologies } from "./getTechnologies";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
+export const database2 = process.env.NOTION_TECHNOLOGIES_DATABASE;
 
-export const databases = [database1];
+export const databases = [database1, database2];
+
+export const PAGES_CACHE_PATH = path.resolve("notionpages.json");
 
 const notion = new Client({
   auth: process.env.NOTION_SECRET,
@@ -103,22 +106,25 @@ export const getDatabase = async databaseId => {
   return results;
 };
 
-export const PAGES_CACHE_PATH = path.resolve("notionpages.json");
-
 export async function getAllEntries() {
   let cachedData;
 
   try {
     cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
   } catch (error) {
-    console.log("Notion Pages cache not initialized. Pages will be fetched now. It may take upto 10 minutes");
+    console.log("Notion Pages cache not initialized. Pages will be fetched now. It may take up to 10 minutes");
   }
 
   if (!cachedData) {
+    const projects = JSON.parse(JSON.stringify(await getProjects()));
+    const technologies = JSON.parse(JSON.stringify(await getTechnologies()));
     cachedData = {
-      projects: await getProjects(),
-      technologies: await getTechnologies(),
+      projects: projects,
+      technologies: technologies,
     };
+
+    // Write the fetched data to the notionpages.json file
+    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
   }
   console.log("cachedData", cachedData);
 
