@@ -147,11 +147,14 @@ export async function getAllPages() {
       // const icon = rootSlugs.includes(slug) ? `/icons/ecosystem/${slug}.svg` : "";
 
       return {
-        page: page,
+        // page: page,
+        decision: page.properties.Decision?.select?.name,
         brand: page.properties.Brand?.rich_text[0]?.plain_text ?? "",
         brand_about: page.properties["Brand About"]?.rich_text[0]?.plain_text ?? "",
-        date: page.properties["Date Display"]?.rich_text[0]?.plain_text ?? "",
+        date: page.properties["Date"]?.date?.start ?? "",
+        dateDisplay: page.properties["Date Display"]?.rich_text[0]?.plain_text ?? "",
         industry: page.properties.Industry?.multi_select?.map(item => item.name) ?? "",
+        logo: page.properties.Logo?.files[0]?.file?.url ?? "",
         name: page.properties["Name"]?.title?.[0]?.plain_text ?? "",
         position: page.properties.Position?.select?.name ?? "",
         project_about: page.properties["Project About"]?.rich_text[0]?.plain_text ?? "",
@@ -173,17 +176,18 @@ export async function getAllPages() {
     };
 
     const transformedPages = allPages.map((page, i) => transformPage(page, allChildBlocks[i]));
-    const sortedPages = transformedPages.filter(page => page.page.properties.Decision?.select?.name === "Include");
+    const sortedPages = transformedPages.filter(page => page.decision === "Include");
+    const orderedPages = sortedPages.sort((a, b) => a.date - b.date);
     // const sortedPages = transformedPages.sort((a, b) => a.ecosystemPage.order - b.ecosystemPage.order);
     try {
-      fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(sortedPages), "utf8");
+      fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
       console.log("Wrote to notionpages cache");
     } catch (error) {
       console.log("ERROR WRITING PAGES CACHE TO FILE");
       console.log(error);
     }
 
-    cachedData = sortedPages;
+    cachedData = orderedPages;
   }
   console.log("cachedData", cachedData);
 

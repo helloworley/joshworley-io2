@@ -7,7 +7,7 @@ const nextConfig = {
     cpus: 1,
   },
   images: {
-    domains: [],
+    domains: ["s3.us-west-2.amazonaws.com"],
   },
   webpack(config) {
     config.module.rules.push({

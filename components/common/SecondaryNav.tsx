@@ -24,7 +24,7 @@ export default function Header() {
     <nav
       className={[
         "bg-smoke-70 fixed z-50 mr-4 w-full overflow-x-auto",
-        "lg:h-screen-64 lg:static lg:flex lg:h-full lg:w-[260px] lg:flex-col lg:justify-center",
+        "lg:h-screen-64 lg:static lg:flex lg:w-[260px] lg:flex-col lg:justify-center",
       ].join(" ")}
     >
       <div className="flex gap-6 px-4 py-4 lg:flex-col lg:px-10">
