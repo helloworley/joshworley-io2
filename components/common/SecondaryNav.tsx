@@ -23,7 +23,7 @@ export default function Header() {
   return (
     <nav
       className={[
-        "bg-smoke-70 fixed z-50 mr-4 w-full overflow-x-auto backdrop-blur-3xl",
+        "bg-smoke-70 fixed z-50 w-full overflow-x-auto backdrop-blur-3xl",
         // "lg:h-screen-64 lg:static lg:flex lg:w-[260px] lg:flex-col lg:justify-center",
         "top-12 lg:sticky lg:h-screen lg:w-64 lg:overflow-y-auto",
       ].join(" ")}

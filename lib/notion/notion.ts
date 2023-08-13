@@ -5,6 +5,7 @@ import path from "path";
 import { RateLimit } from "async-sema";
 import { getProjects } from "./getProjects";
 import { getTechnologies } from "./getTechnologies";
+import { getPhotography } from "./getPhotography";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
 export const database2 = process.env.NOTION_TECHNOLOGIES_DATABASE;
@@ -118,9 +119,11 @@ export async function getAllEntries() {
   if (!cachedData) {
     const projects = JSON.parse(JSON.stringify(await getProjects()));
     const technologies = JSON.parse(JSON.stringify(await getTechnologies()));
+    const photography = JSON.parse(JSON.stringify(await getPhotography()));
     cachedData = {
       projects: projects,
       technologies: technologies,
+      photography: photography,
     };
 
     // Write the fetched data to the notionpages.json file

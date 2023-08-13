@@ -1,20 +1,43 @@
-import PageLayout from "@/components/layout/PageLayout";
 import { getAllEntries } from "@/lib/notion/notion";
-import TitleDescription from "@/components/common/TitleDescription";
+import Image from "next/image";
+import { useEffect } from "react";
+import imagesLoaded from "imagesloaded";
+import SideNavLayout from "@/components/layout/SideNavLayout";
 
 export default function Home({ allEntries }) {
-  console.log(allEntries);
+  console.log("allEntries", allEntries);
 
-  const content = (
-    <>
-      <TitleDescription title="Photography" description="See the world through my eyes." />
-    </>
-  );
+  useEffect(() => {
+    const Masonry = require("masonry-layout");
+    const grid = document.querySelector(".masonry-grid");
+
+    imagesLoaded(grid, function () {
+      const msnry = new Masonry(grid, {
+        itemSelector: ".masonry-item",
+        columnWidth: ".masonry-item",
+        percentPosition: true,
+      });
+
+      msnry.layout();
+
+      return () => {
+        msnry.destroy();
+      };
+    });
+  }, []);
 
   return (
-    <>
-      <PageLayout content={content} />
-    </>
+    <SideNavLayout>
+      <div className="masonry-grid">
+        {allEntries.photography.map(photo => {
+          return (
+            <div className="masonry-item" key={photo.name}>
+              <Image src={photo.image} alt={photo.name} width={1000} height={1000} unoptimized={true} />
+            </div>
+          );
+        })}
+      </div>
+    </SideNavLayout>
   );
 }
 

@@ -14,7 +14,7 @@ export default function Home({ allEntries }) {
         description="I have professional experience and working knowledge of the following design applications and frontend technologies. I am comfortable jumping
         into projects using these technologies and contributing immediately."
       />
-      <div className="mt-10 grid grid-cols-2 gap-3 gap-y-6 md:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
         {allEntries.technologies?.map(tech => {
           return <Technology tech={tech} key={tech.name} />;
         })}

@@ -1,3 +1,10 @@
+/**
+ * /* eslint-disable-next-line @typescript-eslint/no-var-requires
+ *
+ * @format
+ */
+
+/** @type {import('tailwindcss').Config} */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
