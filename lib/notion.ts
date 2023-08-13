@@ -142,7 +142,7 @@ export async function getAllPages() {
     const allChildBlocks = await Promise.all(childBlocksPromises);
 
     const transformPage = (page, childBlocks) => {
-      const slug = page.properties.slug?.rich_text?.[0]?.plain_text ?? "";
+      // const slug = page.properties.slug?.rich_text?.[0]?.plain_text ?? "";
       // const appear_on = rootSlugs.includes(slug) ? "ROOT" : "";
       // const icon = rootSlugs.includes(slug) ? `/icons/ecosystem/${slug}.svg` : "";
 
@@ -173,7 +173,7 @@ export async function getAllPages() {
     };
 
     const transformedPages = allPages.map((page, i) => transformPage(page, allChildBlocks[i]));
-    const sortedPages = transformedPages;
+    const sortedPages = transformedPages.filter(page => page.page.properties.Decision?.select?.name === "Include");
     // const sortedPages = transformedPages.sort((a, b) => a.ecosystemPage.order - b.ecosystemPage.order);
     try {
       fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(sortedPages), "utf8");

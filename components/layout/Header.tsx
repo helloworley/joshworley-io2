@@ -14,7 +14,7 @@ export default function Header() {
   return (
     <>
       <nav id="header" className="bg-smoke-70 fixed z-50 w-full">
-        <div className="mx-auto flex h-16 items-center justify-between px-4 md:h-[64px] md:px-5 lg:px-8">
+        <div className="mx-auto flex h-16 items-center justify-between px-4 md:h-[64px] md:px-5 lg:px-10">
           <div>
             <Link href="/" className="flex text-gray-900">
               <p className="text-white">Josh Worley</p>

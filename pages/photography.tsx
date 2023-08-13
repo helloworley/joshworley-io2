@@ -1,14 +1,19 @@
+import PageLayout from "@/components/layout/PageLayout";
 import { getAllPages } from "@/lib/notion";
-import SecondaryNav from "@/components/common/SecondaryNav";
+import TitleDescription from "@/components/page/TitleDescription";
 
 export default function Home({ allPages }) {
   console.log(allPages);
+
+  const content = (
+    <>
+      <TitleDescription title="Photography" description="See the world through my eyes." />
+    </>
+  );
+
   return (
     <>
-      <SecondaryNav />
-      <main className={`flex min-h-screen flex-col items-center justify-between p-24`}>
-        <h1>New website</h1>
-      </main>
+      <PageLayout content={content} />
     </>
   );
 }

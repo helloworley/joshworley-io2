@@ -52,6 +52,9 @@ const config: Config = {
           95: "hsl(0, 0%, 5%)",
         },
       },
+      height: {
+        "screen-64": "calc(100vh - 64px)",
+      },
     },
   },
   plugins: [],
