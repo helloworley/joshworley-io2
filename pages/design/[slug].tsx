@@ -14,9 +14,9 @@ export default function Home({ allPages }) {
   console.log("pageContent", pageContent);
 
   const aside = (
-    <div className="grid gap-8">
+    <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
       <Image className="rounded-xl" src={pageContent.logo} alt={`${pageContent.brand} logo`} width={160} height={160} />
-      <LabelContent label="Technologies" content={pageContent.technologies} />
+      <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-1" />
     </div>
   );
 
@@ -44,8 +44,18 @@ export default function Home({ allPages }) {
   );
 
   return (
-    <div className="bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${pageContent.logo})` }}>
-      <div className="bg-smoke-70 h-full backdrop-blur-3xl">
+    <div className="relative h-screen">
+      {/* Background Image */}
+      <div
+        className="fixed bottom-0 left-0 right-0 top-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${pageContent.logo})` }}
+      ></div>
+
+      {/* Blurred Overlay */}
+      <div className="bg-smoke-70 fixed bottom-0 left-0 right-0 top-0 backdrop-blur-3xl"></div>
+
+      {/* Main Content */}
+      <div className="max-w-screen relative z-10">
         <PageLayout content={content} aside={aside} />
       </div>
     </div>

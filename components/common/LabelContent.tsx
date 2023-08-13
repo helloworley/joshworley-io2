@@ -1,6 +1,6 @@
-export default function LabelContent({ label, content }: { label: string; content: any[] | string }) {
+export default function LabelContent({ label, content, className }: { label: string; content: any[] | string; className?: string }) {
   return (
-    <div>
+    <div className={className}>
       <p className="text-mist-60 mb-2">{label}</p>
       <div>
         {typeof content === "string" ? (

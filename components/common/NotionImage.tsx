@@ -28,6 +28,7 @@ export const NotionImage: React.FC<{
         <Image
           width={1000}
           height={1000}
+          layout="responsive"
           src={imageSrc}
           alt={alt}
           className="mx-auto rounded"
