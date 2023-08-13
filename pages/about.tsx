@@ -1,8 +1,8 @@
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllPages } from "@/lib/notion";
+import { getAllEntries } from "@/lib/notion/notion";
 
-export default function Home({ allPages }) {
-  console.log(allPages);
+export default function Home({ allEntries }) {
+  console.log(allEntries);
 
   const content = (
     <>
@@ -18,10 +18,10 @@ export default function Home({ allPages }) {
 }
 
 export const getStaticProps = async () => {
-  const allPages = await getAllPages();
+  const allEntries = await getAllEntries();
 
   return {
-    props: { allPages },
+    props: { allEntries },
     revalidate: 1,
   };
 };

@@ -17,7 +17,7 @@ export default function Header() {
         <div className="mx-auto flex h-16 items-center justify-between px-4 md:h-[64px] md:px-5 lg:px-10">
           <div>
             <Link href="/" className="flex text-gray-900">
-              <p className="text-white">Josh Worley</p>
+              <p className="font-serif text-lg text-white">Josh Worley</p>
             </Link>
           </div>
           <div className="flex items-center">

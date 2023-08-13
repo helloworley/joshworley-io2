@@ -1,16 +1,16 @@
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllPages } from "@/lib/notion";
+import { getAllEntries } from "@/lib/notion/notion";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import LabelContent from "@/components/common/LabelContent";
 import LineBreak from "@/components/common/LineBreak";
 import RenderBlock from "@/components/common/RenderBlock";
 
-export default function Home({ allPages }) {
-  console.log("allPages", allPages);
+export default function Home({ allEntries }) {
+  console.log("allEntries", allEntries);
   const router = useRouter();
   const { slug } = router.query;
-  const pageContent = allPages.filter(page => slug === page.slug)[0];
+  const pageContent = allEntries.filter(page => slug === page.slug)[0];
   console.log("pageContent", pageContent);
 
   const aside = (
@@ -63,7 +63,7 @@ export default function Home({ allPages }) {
 }
 
 export const getStaticPaths = async () => {
-  const designPages = await getAllPages();
+  const designPages = await getAllEntries();
   const paths = designPages.map(item => ({
     params: { slug: item.slug },
   }));
@@ -74,10 +74,10 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async () => {
-  const allPages = await getAllPages();
+  const allEntries = await getAllEntries();
 
   return {
-    props: { allPages },
+    props: { allEntries },
     revalidate: 1,
   };
 };
