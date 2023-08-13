@@ -19,4 +19,30 @@
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #1a1a1a;
+  font-family: "Basic Sans", sans-serif;
+}
+
+.serif {
+  font-family: "bigmoore", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sans-serif {
+  font-family: "basic-sans", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Big Moore", serif;
+}
+
+p {
+  font-family: "bigmoore", serif;
 }
