@@ -9,6 +9,7 @@ export const getPhotography = async () => {
     return {
       image: page.properties.Image?.files[0]?.file?.url ?? "",
       name: page.properties["Name"]?.title?.[0]?.plain_text ?? "",
+      id: page.id,
     };
   };
   const transformedPages = result.map((page, i) => transformPage(page));

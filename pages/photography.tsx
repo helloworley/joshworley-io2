@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";
+import { NotionImage } from "@/components/common/NotionImage";
 
 export default function Home({ allEntries }) {
   console.log("allEntries", allEntries);
@@ -32,7 +33,8 @@ export default function Home({ allEntries }) {
         {allEntries.photography.map(photo => {
           return (
             <div className="masonry-item" key={photo.name}>
-              <Image src={photo.image} alt={photo.name} width={1000} height={1000} unoptimized={true} />
+              <NotionImage src={photo.image} alt={photo.name} id={photo.id} />
+              {/* <Image  width={1000} height={1000} unoptimized={true} /> */}
             </div>
           );
         })}

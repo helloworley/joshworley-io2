@@ -6,7 +6,10 @@ export default function CircleButton({ data }: { data: { name: string; link: str
   return (
     <Link
       href={link}
-      className={["bg-mist-5 hover:bg-mist-10 flex h-32 w-32 items-center justify-center rounded-full border border-white", className].join(" ")}
+      className={[
+        "bg-mist-5 hover:bg-mist-10 flex h-32 w-32 items-center justify-center rounded-full border border-white text-center leading-5",
+        className,
+      ].join(" ")}
     >
       <p className="font-sans-serif text-white">{name}</p>
     </Link>

@@ -12,7 +12,7 @@ export default function HeaderMenuLink({ name, link, className }: { name: string
     <li className="list-none">
       <Link
         href={link}
-        className={["hover:text-mist-70 flex items-center leading-4", isActive ? "text-white" : "text-mist-40", className].join(" ")}
+        className={["hover:text-mist-70 break-none w-max-content flex items-center", isActive ? "text-white" : "text-mist-40", className].join(" ")}
         onClick={clear}
       >
         {name}

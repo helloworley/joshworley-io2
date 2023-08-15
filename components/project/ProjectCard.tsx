@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function ProjectCard({ project }) {
   const { brand, dateDisplay, industry, logo, name, slug } = project;
   return (
-    <Link href={`/design/${slug}`}>
+    <Link href={`/design-and-development/${slug}`}>
       <div className="rounded-xl bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}>
         <div className="bg-smoke-70 grid h-full grid-cols-[64px_1fr] gap-3 rounded-xl p-3 backdrop-blur-xl">
           <Image className="rounded-xl" src={logo} alt={`${brand} logo`} height={64} width={64} />

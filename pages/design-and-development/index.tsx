@@ -16,8 +16,8 @@ export default function Home({ allEntries }) {
   const content = (
     <div className="grid gap-8">
       <TitleDescription
-        title="Design"
-        description="A collection of projects that Josh has designed throughout the years. Select a project to learn more about the project goal, design, and implementation."
+        title="Design & Development"
+        description="A collection of projects that Josh has designed and/or developed throughout the years. Select a project to learn more about the project goal, design, and implementation."
       />
       <div className="grid gap-3 md:grid-cols-2">
         {allEntries.projects?.map(project => {

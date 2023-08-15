@@ -5,13 +5,13 @@ import LoadingAnimation from "@/components/common/LoadingAnimation";
 export const NotionImage: React.FC<{
   src: string;
   alt: string;
-  blockId: string;
-}> = ({ src, alt, blockId }) => {
+  id: string;
+}> = ({ src, alt, id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(src);
 
   const handleError = async () => {
-    const res = await fetch(`/api/image?blockId=${blockId}`).then(res => res.json());
+    const res = await fetch(`/api/image?id=${id}`).then(res => res.json());
     // TODO: Use Vercel Blob (Joined Waitlist) for storing and serving the files, instead of fething from notion API each time.
     setImageSrc(res.imageSrc);
     setIsLoading(false);

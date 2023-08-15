@@ -15,9 +15,9 @@ export default function RootLayout({ children, socials }: RootLayoutProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
       <div className="bg-gray-1200 bottom-0 mb-0">
-        <div className="min-h-screen">
+        <div className="">
           <Header />
-          <div className="mt-16">{children}</div>
+          <div className="pt-16">{children}</div>
           {/* <Footer /> */}
         </div>
       </div>

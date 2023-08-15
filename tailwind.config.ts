@@ -67,6 +67,9 @@ const config: Config = {
       height: {
         "screen-64": "calc(100vh - 64px)",
       },
+      width: {
+        "max-content": "max-content",
+      },
     },
   },
   plugins: [],
