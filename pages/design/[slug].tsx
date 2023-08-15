@@ -3,7 +3,7 @@ import { getAllEntries } from "@/lib/notion/notion";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import LabelContent from "@/components/common/LabelContent";
-import LineBreak from "@/components/common/LineBreak";
+import Divider from "@/components/common/Divider";
 import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 
@@ -33,7 +33,7 @@ export default function Home({ allEntries }) {
       </div>
       <LabelContent label="About the Brand" content={pageContent.brand_about} />
       <LabelContent label="About the Project" content={pageContent.project_about} />
-      <LineBreak />
+      <Divider />
       <div>
         {pageContent.childBlocks?.map((block, i) => (
           <RenderBlock allBlocks={pageContent.childBlocks} block={block} key={i} />

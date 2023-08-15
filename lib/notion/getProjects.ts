@@ -1,33 +1,13 @@
 import fs from "fs";
-import { getDatabase, PAGES_CACHE_PATH, fetchChildBlocks } from "./notion";
+import { getDatabase, PAGES_CACHE_PATH } from "./notion";
 export const database = process.env.NOTION_PROJECTS_DATABASE;
+import { getChildBlocks } from "./getChildBlocks";
 
 export const getProjects = async () => {
   const result = await getDatabase(database);
 
   const livePages = await result.filter(page => page.properties.Decision?.select?.name === "Include");
-
-  const childBlocksPromises = livePages.map(async (page, index, array) => {
-    console.log(`Processing page ${index + 1} of ${array.length}`);
-
-    const results = await Promise.allSettled([fetchChildBlocks(page.id)]);
-
-    const childBlocks = [];
-
-    for (const result of results) {
-      if (result.status === "fulfilled" && Array.isArray(result.value)) {
-        childBlocks.push(...result.value);
-      } else if (result.status === "rejected") {
-        console.error(`Error fetching child blocks of page ${index + 1} of ${array.length}`);
-        console.error(result.reason);
-      }
-    }
-
-    console.log(`Finished processing page ${index + 1} of ${array.length}`);
-    return childBlocks;
-  });
-
-  const allChildBlocks = await Promise.all(childBlocksPromises);
+  const allChildBlocks = await getChildBlocks(livePages);
 
   const transformPage = (page, childBlocks) => {
     return {
@@ -58,11 +38,10 @@ export const getProjects = async () => {
       // },
     };
   };
-
   const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocks[i]));
   const sortedPages = transformedPages.filter(page => page.decision === "Include");
-  const orderedPages = sortedPages.sort((a, b) => a.date - b.date);
-  // const sortedPages = transformedPages.sort((a, b) => a.ecosystemPage.order - b.ecosystemPage.order);
+  const orderedPages = sortedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
   try {
     fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
     console.log("Wrote to notionpages cache");

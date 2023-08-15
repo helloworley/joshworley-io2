@@ -1,5 +1,5 @@
 import fs from "fs";
-import { getDatabase, PAGES_CACHE_PATH, fetchChildBlocks } from "./notion";
+import { getDatabase, PAGES_CACHE_PATH } from "./notion";
 export const database = process.env.NOTION_TECHNOLOGIES_DATABASE;
 
 export const getTechnologies = async () => {
@@ -13,11 +13,9 @@ export const getTechnologies = async () => {
       type: page.properties["Type"]?.multi_select?.map(item => item.name) ?? "",
     };
   };
-
   const transformedPages = result.map((page, i) => transformPage(page));
-  // const sortedPages = transformedPages.filter(page => page.decision === "Include");
-  const orderedPages = transformedPages.sort((a, b) => b.name - a.name);
-  // const sortedPages = transformedPages.sort((a, b) => a.ecosystemPage.order - b.ecosystemPage.order);
+  const orderedPages = transformedPages.sort((a, b) => a.name.localeCompare(b.name));
+
   try {
     fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
     console.log("Wrote to notionpages cache");

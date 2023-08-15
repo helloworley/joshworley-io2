@@ -72,7 +72,7 @@ const RenderBlock = ({ block, allBlocks }) => {
         );
       } else {
         return (
-          <div key={block.id} className="max-w-4xl py-2  text-white ">
+          <div key={block.id} className=" max-w-4xl py-2">
             {value.rich_text.map((text, i) => {
               if (!text.plain_text) return null;
 
@@ -81,7 +81,7 @@ const RenderBlock = ({ block, allBlocks }) => {
               isStrikethrough = text.annotations.strikethrough ? "line-through" : "";
               isUnderline = text.annotations.underline ? "underline" : "";
               const formattedText = (
-                <p key={i} className={`${isBold} ${isItalic} ${isStrikethrough} ${isUnderline}`}>
+                <p key={i} className={`${isBold} ${isItalic} ${isStrikethrough} ${isUnderline} text-white`}>
                   {text.plain_text}
                 </p>
               );

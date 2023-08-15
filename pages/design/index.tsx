@@ -14,17 +14,17 @@ export default function Home({ allEntries }) {
   );
 
   const content = (
-    <>
+    <div className="grid gap-8">
       <TitleDescription
         title="Design"
         description="A collection of projects that Josh has designed throughout the years. Select a project to learn more about the project goal, design, and implementation."
       />
-      <div className="grid gap-3 lg:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         {allEntries.projects?.map(project => {
           return <ProjectCard project={project} key={project.name} />;
         })}
       </div>
-    </>
+    </div>
   );
 
   return (

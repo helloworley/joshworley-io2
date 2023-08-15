@@ -1,3 +1,3 @@
-export default function LineBreak() {
+export default function Divider() {
   return <div className="bg-mist-20 h-[1px]"></div>;
 }

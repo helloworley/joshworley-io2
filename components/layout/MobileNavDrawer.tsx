@@ -21,7 +21,7 @@ export default function MobileNavDrawer(props: MobilNavDrawerProps) {
   return (
     <div
       className={[
-        "bg-smoke-70 absolute bottom-0 right-0 h-full w-[calc(100%-64px)] max-w-[400px] transform cursor-pointer overflow-y-auto transition-all duration-150 ease-in-out",
+        "bg-smoke-70 absolute bottom-0 right-0 h-full w-[calc(100%-64px)] max-w-[400px] transform cursor-pointer overflow-y-auto backdrop-blur-lg transition-all duration-150 ease-in-out",
         onEnter ? "translate-x-0" : "translate-x-full",
         className,
       ].join(" ")}
