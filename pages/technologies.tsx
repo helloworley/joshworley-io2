@@ -5,7 +5,7 @@ import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 
 export default function Home({ allEntries }) {
-  console.log(allEntries);
+  console.log("allEntries", allEntries);
 
   const content = (
     <>
@@ -37,3 +37,15 @@ export const getStaticProps = async () => {
     revalidate: 1,
   };
 };
+
+// const test = [
+//   {
+//     icon: "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/9b14583b-6354-42b8-9aad-93e952daf48b/adobe-after-effects.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20230818%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20230818T002608Z&X-Amz-Expires=3600&X-Amz-Signature=76c3e4f66b28cecc7169290bbd8995891c209019f5ffba4d2764f80fcd13e5c3&X-Amz-SignedHeaders=host&x-id=GetObject",
+//     imageRetry: {
+//       databaseId: "1e6bf218-9750-4a5f-8113-a327dc1d7c54",
+//       pageId: "8d3c626f-8ce8-4c5e-8e8c-444a635a296a",
+//       propertyId
+//     },
+//     propertyId: "gmBE",
+//   },
+// ];

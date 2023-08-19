@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { getImageSrc } from "../../lib/notion/notion";
+import { getBlockImageSrc } from "@/lib/notion/notion";
 
 const handler: NextApiHandler = async (req, res) => {
   const blockId = req.query.blockId as string;
@@ -9,7 +9,7 @@ const handler: NextApiHandler = async (req, res) => {
     return;
   }
 
-  const imageSrc = await getImageSrc(blockId);
+  const imageSrc = await getBlockImageSrc(blockId);
   res.json({ imageSrc });
 };
 

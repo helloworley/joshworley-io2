@@ -16,7 +16,7 @@ export const databases = [database1, database2];
 
 export const PAGES_CACHE_PATH = path.resolve("notionpages.json");
 
-export const notion = new Client({
+export const notionClient = new Client({
   auth: process.env.NOTION_SECRET,
 });
 
@@ -45,7 +45,7 @@ export const getDatabase = async databaseId => {
   while (true) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>
-      notion.databases.query({
+      notionClient.databases.query({
         database_id: databaseId,
         start_cursor: startCursor,
       }),
@@ -94,21 +94,34 @@ export async function getAllEntries() {
   return cachedData;
 }
 
-export const getImageSrc = async (blockId: string) => {
+export async function getSingleEntryType(type) {}
+
+export const getBlockImageSrc = async (blockId: string) => {
   const supportedBlockType = "image";
-  const block = await notion.blocks.retrieve({ block_id: blockId });
+  const block = await notionClient.blocks.retrieve({ block_id: blockId });
 
   const imageBlock = block as unknown as ImageBlockObjectResponse;
-
   if (imageBlock.type !== supportedBlockType) {
     throw new Error("Block is not an image");
   }
-
   const image = imageBlock.image;
-
   if (image.type === "external") {
     return image.external.url;
   }
 
   return image.file.url;
+};
+
+export const getPropertyImageSrc = async (pageId: string, propertyId: string): Promise<string[]> => {
+  // get the new property images source
+  const response: any = await notionClient.pages.properties.retrieve({ page_id: pageId, property_id: propertyId });
+  const imageSrc = response.files[0]?.file?.url ?? "";
+
+  // To save the new URL to the allEntries object
+  // property ID @ page ID should give you the location where the file is
+  // [portfolioSection] / [index] / [propName]
+  // technology / [index] / icon
+  // education / [index] / logo
+
+  return imageSrc;
 };

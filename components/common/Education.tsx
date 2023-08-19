@@ -1,10 +1,12 @@
-import Image from "next/image";
+import { NotionPropertyImage } from "./NotionPropertyImage";
 
 export default function Education({ education }) {
-  const { certification, dateDisplay, location, logo, name } = education;
+  const { certification, dateDisplay, location, logo, name, imageRetry } = education;
   return (
     <div className="flex grid-cols-[64px_1fr] items-center gap-2 md:gap-3">
-      <Image className="rounded-xl" src={logo} alt={`${name} logo`} height={64} width={64} />
+      <div>
+        <NotionPropertyImage image={logo} alt={`${name} logo`} height={64} width={64} responsive={false} />
+      </div>
       <div className="w-full md:flex md:justify-between">
         <div>
           <p className="leading-5 text-white">{name}</p>

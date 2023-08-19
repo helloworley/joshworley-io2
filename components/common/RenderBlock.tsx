@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NotionImage } from "./NotionImage";
+import { NotionBlockImage } from "./NotionBlockImage";
 
 const getPlainText = richText => {
   return richText && richText.length > 0 ? richText[0].plain_text : "";
@@ -230,7 +230,7 @@ const RenderBlock = ({ block, allBlocks }) => {
       return (
         <div key={block.id} className="my-8">
           {/* <img src={imageUrl} alt={imgCaption || "image"} className="my-2 h-auto w-full" /> */}
-          <NotionImage src={imageUrl} alt={imgCaption || "image"} blockId={block.id} />
+          <NotionBlockImage src={imageUrl} alt={imgCaption || "image"} blockId={block.id} />
           {imgCaption && <p className="my-4 text-center italic text-gray-600">{imgCaption}</p>}
         </div>
       );

@@ -1,4 +1,4 @@
-import { notion, rateLimiter, fetchDataWithRetry } from "./notion";
+import { notionClient, rateLimiter, fetchDataWithRetry } from "./notion";
 
 const fetchChildBlocks = async (blockId: string, level: number = 0) => {
   console.log(`Fetching child blocks of ${blockId} at level ${level}`);
@@ -13,7 +13,7 @@ const fetchChildBlocks = async (blockId: string, level: number = 0) => {
   while (true) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>
-      notion.blocks.children.list({
+      notionClient.blocks.children.list({
         block_id: blockId,
         start_cursor: startCursor,
       }),

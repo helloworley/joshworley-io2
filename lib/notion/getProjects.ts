@@ -18,7 +18,6 @@ export const getProjects = async () => {
       date: page.properties["Date"]?.date?.start ?? "",
       dateDisplay: page.properties["Date Display"]?.rich_text[0]?.plain_text ?? "",
       industry: page.properties.Industry?.multi_select?.map(item => item.name) ?? "",
-      logo: page.properties.Logo?.files[0]?.file?.url ?? "",
       name: page.properties["Name"]?.title?.[0]?.plain_text ?? "",
       position: page.properties.Position?.select?.name ?? "",
       project_about: page.properties["Project About"]?.rich_text[0]?.plain_text ?? "",
@@ -26,6 +25,12 @@ export const getProjects = async () => {
       seo_description: page.properties["SEO Description"]?.rich_text[0]?.plain_text ?? "",
       slug: page.properties["Slug"]?.rich_text[0]?.plain_text ?? "",
       technologies: page.properties.Technologies?.multi_select?.map(item => item.name) ?? "",
+      logo: {
+        url: page.properties["Logo"]?.files[0]?.file?.url ?? "",
+        databaseId: page.parent.database_id,
+        pageId: page.id,
+        propertyId: page.properties["Logo"].id,
+      },
       url: page.properties["URL"]?.url ?? "",
       childBlocks: childBlocks.map(block => {
         // Remove unnecessary fields from block

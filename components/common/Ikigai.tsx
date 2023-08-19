@@ -7,7 +7,7 @@ export default function Ikigai() {
   return (
     <>
       {/* mobile */}
-      <div className="relative block h-[320px] w-[320px] md:hidden">
+      <div className="relative block h-[380px] w-[320px] overflow-hidden md:hidden">
         <Image
           className="absolute left-1/2 top-1/2 max-h-[556px] -translate-x-1/2 -translate-y-1/2 transform"
           src="/ikigai-text.svg"
@@ -34,7 +34,7 @@ export default function Ikigai() {
         </div>
       </div>
       {/* tablet^ */}
-      <div className="relative hidden h-[556px] w-[556px] md:block">
+      <div className="relative hidden h-[556px] w-[556px] overflow-hidden md:block">
         <Image
           className="absolute left-1/2 top-1/2 max-h-[556px] -translate-x-1/2 -translate-y-1/2 transform"
           src="/ikigai-text.svg"

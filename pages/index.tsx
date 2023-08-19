@@ -27,8 +27,8 @@ export default function Home({ allEntries }) {
   console.log(allEntries);
   return (
     <SideNavLayout>
-      <BlurredBackground image="/default-background.jpeg" className="mt-24 md:mt-0 ">
-        <div className="md:h-screen-64 md:flex md:items-center md:justify-center">
+      <BlurredBackground image="/default-background.jpeg" className="mt-12 md:mt-0">
+        <div className="md:flex md:h-screen md:items-center md:justify-center">
           <div className="flex flex-col items-center gap-16 pb-20">
             <Ikigai />
             <div className="mx-auto grid grid-cols-2 gap-10 md:grid-cols-4">

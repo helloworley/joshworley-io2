@@ -7,10 +7,15 @@ export const getTechnologies = async () => {
 
   const transformPage = page => {
     return {
-      icon: page.properties.Icon?.files[0]?.file?.url ?? "",
       name: page.properties["Name"]?.title?.[0]?.plain_text ?? "",
       url: page.properties["URL"]?.url ?? "",
       type: page.properties["Type"]?.multi_select?.map(item => item.name) ?? "",
+      icon: {
+        url: page.properties["Icon"]?.files[0]?.file?.url ?? "",
+        databaseId: page.parent.database_id,
+        pageId: page.id,
+        propertyId: page.properties["Icon"].id,
+      },
     };
   };
   const transformedPages = result.map((page, i) => transformPage(page));

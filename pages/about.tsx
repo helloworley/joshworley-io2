@@ -10,8 +10,8 @@ import Education from "@/components/common/Education";
 export default function Home({ allEntries }) {
   const pageContent = allEntries.singlePages.filter(page => page.slug === "about")[0];
   const education = allEntries.education;
-  // const education = allEntries.education.sort((a, b) => new Date(b.date) - new Date(a.date));
-  console.log("education", allEntries.education);
+
+  console.log("pageContent", pageContent);
 
   const aside = (
     <div>

@@ -3,7 +3,9 @@ import Image from "next/image";
 import { useEffect } from "react";
 import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";
-import { NotionImage } from "@/components/common/NotionImage";
+import { NotionBlockImage } from "@/components/common/NotionBlockImage";
+import RenderBlock from "@/components/common/RenderBlock";
+import { NotionPropertyImage } from "@/components/common/NotionPropertyImage";
 
 export default function Home({ allEntries }) {
   console.log("allEntries", allEntries);
@@ -31,9 +33,12 @@ export default function Home({ allEntries }) {
     <SideNavLayout>
       <div className="masonry-grid">
         {allEntries.photography.map(photo => {
+          console.log(photo);
           return (
             <div className="masonry-item" key={photo.name}>
-              <NotionImage src={photo.image} alt={photo.name} id={photo.id} />
+              {/* <RenderBlock block={photo} allBlocks={allEntries.photography} /> */}
+              {/* <NotionBlockImage src={photo.image} alt={photo.name} blockId={photo.id} /> */}
+              <NotionPropertyImage image={photo.image} alt={photo.name} />
               {/* <Image  width={1000} height={1000} unoptimized={true} /> */}
             </div>
           );

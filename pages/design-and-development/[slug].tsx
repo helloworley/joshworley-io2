@@ -6,6 +6,7 @@ import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
 import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
+import { NotionPropertyImage } from "@/components/common/NotionPropertyImage";
 
 export default function Home({ allEntries }) {
   const router = useRouter();
@@ -14,7 +15,8 @@ export default function Home({ allEntries }) {
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
-      <Image className="rounded-xl" src={pageContent.logo} alt={`${pageContent.brand} logo`} width={160} height={160} />
+      {/* <Image className="rounded-xl" src={pageContent.logo} alt={`${pageContent.brand} logo`} width={160} height={160} /> */}
+      <NotionPropertyImage image={pageContent.logo} width={160} height={160} alt={`${pageContent.brand} logo`} />
       <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-1" />
     </div>
   );
