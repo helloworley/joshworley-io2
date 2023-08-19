@@ -1,7 +1,6 @@
 import PageLayout from "@/components/layout/PageLayout";
 import { getAllEntries } from "@/lib/notion/notion";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
 import RenderBlock from "@/components/common/RenderBlock";
@@ -15,8 +14,16 @@ export default function Home({ allEntries }) {
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
-      {/* <Image className="rounded-xl" src={pageContent.logo} alt={`${pageContent.brand} logo`} width={160} height={160} /> */}
-      <NotionPropertyImage image={pageContent.logo} width={160} height={160} alt={`${pageContent.brand} logo`} />
+      <div className="w-[160px]">
+        <NotionPropertyImage
+          image={pageContent.logo}
+          width={160}
+          height={160}
+          alt={`${pageContent.brand} logo`}
+          cacheCategory="projects"
+          cacheProperty="logo"
+        />
+      </div>
       <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-1" />
     </div>
   );

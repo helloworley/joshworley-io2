@@ -24,7 +24,7 @@ const LoadingAnimation = (props: LoadingAnimationProps) => {
     <div className={[`grid h-full w-full flex-grow place-items-center`, minHeight, className].join(" ")}>
       <div className={["bg-mist-5 flex h-full w-full items-center justify-center", minHeight].join(" ")}>
         {/* <span className="h-full w-full text-transparent">loading...</span> */}
-        <_Loader size={size} theme={theme} />
+        {/* <_Loader size={size} theme={theme} /> */}
       </div>
     </div>
   );

@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { NotionPropertyImage, NotionPropertyImageTypes } from "../common/NotionPropertyImage";
+
 export default function BlurredBackground({
   children,
   image,
@@ -5,22 +8,39 @@ export default function BlurredBackground({
   className,
 }: {
   children: any;
-  image?: string;
+  image?: NotionPropertyImageTypes | string;
   bg?: string;
   className?: string;
 }) {
-  return (
-    <div className={["relative flex  flex-col", className].join(" ")}>
-      <div className="overflow-hidden">
-        {/* Background Image */}
-        <div className="fixed bottom-0 left-0 right-0 top-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${image})` }}></div>
+  const renderBackgroundImage = () => {
+    if (typeof image === "string") {
+      return <Image src={image} alt="Background" layout="fill" objectFit="cover" objectPosition="center" className="fixed left-0 top-0 z-0" />;
+    } else if (image?.url) {
+      return (
+        <NotionPropertyImage
+          image={image}
+          alt="Background"
+          objectFit="cover"
+          className="left-50% top-50% -translate-x-50% -translate-y-50% absolute z-0 transform overflow-hidden"
+          width={3000}
+          height={3000}
+        />
+      );
+    }
+    return null;
+  };
 
-        {/* Blurred Overlay */}
-        <div className={`${bg} fixed bottom-0 left-0 right-0 top-0 backdrop-blur-3xl`}></div>
-      </div>
+  return (
+    <div className={["relative flex h-screen flex-col", className].join(" ")}>
+      {/* Background Image */}
+      {/* {image && renderBackgroundImage()} */}
+      <div className="fixed bottom-0 left-0 right-0 top-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${image})` }}></div>
+
+      {/* Blurred Overlay */}
+      <div className={`${bg} fixed bottom-0 left-0 right-0 top-0 z-0 backdrop-blur-3xl`}></div>
 
       {/* Main Content */}
-      <div className="max-w-screen relative z-10 w-full">{children}</div>
+      <div className="max-w-screen relative z-10 w-full overflow-auto">{children}</div>
     </div>
   );
 }

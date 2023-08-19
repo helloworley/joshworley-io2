@@ -1,36 +1,39 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LoadingAnimation from "./LoadingAnimation";
+
+export interface NotionPropertyImageTypes {
+  propertyId: string;
+  pageId: string;
+  url: string;
+  databaseId: string;
+}
 
 export const NotionPropertyImage: React.FC<{
   alt: string;
-  image: {
-    propertyId: string;
-    pageId: string;
-    url: string;
-    databaseId: string;
-  };
+  image: NotionPropertyImageTypes;
   width?: number;
   height?: number;
-  responsive?: boolean;
-}> = ({ alt, image, width = 800, height = 800, responsive = true }) => {
+  layout?: "responsive" | "fill" | "fixed" | "intrinsic" | "clamped"; // default is intrinsic
+  objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down"; // default is fill
+  className?: string;
+  cacheCategory?: string;
+  cacheProperty?: string;
+}> = ({ alt, image, width = 800, height = 800, layout = "intrinsic", objectFit = "fill", className, cacheCategory, cacheProperty }) => {
   const { propertyId, pageId, url, databaseId } = image;
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
 
   const handleError = async () => {
-    console.log("handling errors");
-    const res = await fetch(`/api/property-image?pageId=${pageId}&propertyId=${propertyId}`).then(res => res.json());
-    console.log("res", res);
+    const encodedPageId = encodeURIComponent(pageId);
+    const encodedPropertyId = encodeURIComponent(propertyId);
+    const encodedCacheCategory = encodeURIComponent(cacheCategory);
+    const encodedCacheProperty = encodeURIComponent(cacheProperty);
+
+    const res = await fetch(
+      `/api/property-image?pageId=${encodedPageId}&propertyId=${encodedPropertyId}&cacheCategory=${encodedCacheCategory}&cacheProperty=${encodedCacheProperty}`,
+    ).then(res => res.json());
     const newImageUrl = res?.imageSrc;
-    // await updateCache();
-
-    // Fetch the new URL from the updated cache
-    // const newCacheData = await fetch("/notionpages.json").then(res => res.json());
-
-    // Assuming the cache structure is an array and each item has an `image` property
-    // Find the new URL for the image
-    // const newImageUrl = newCacheData.find(item => item.page.id === imageRetry.pageId)?.image;
 
     if (newImageUrl) {
       setImageSrc(newImageUrl);
@@ -40,7 +43,7 @@ export const NotionPropertyImage: React.FC<{
   };
 
   return (
-    <div className="h-full w-full">
+    <div className={["h-full w-full", className].join(" ")}>
       {isLoading ? (
         <div className="my-auto">
           <LoadingAnimation size={24} minHeight={`min-h-[${height}px]`} />
@@ -52,11 +55,12 @@ export const NotionPropertyImage: React.FC<{
           height={height}
           src={imageSrc}
           alt={alt}
-          className="max-w-fill mx-auto rounded"
+          className="max-w-fill mx-auto"
           onError={handleError}
           unoptimized={true}
           onLoad={() => setIsLoading(false)}
-          layout={responsive && "responsive"}
+          // layout={layout}
+          objectFit={objectFit}
         />
       </div>
     </div>

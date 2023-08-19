@@ -5,7 +5,7 @@ import ProjectCard from "@/components/project/ProjectCard";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 
 export default function Home({ allEntries }) {
-  console.log("allEntries", allEntries);
+  // console.log("allEntries", allEntries);
 
   const aside = (
     <div>

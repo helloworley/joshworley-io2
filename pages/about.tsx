@@ -11,7 +11,7 @@ export default function Home({ allEntries }) {
   const pageContent = allEntries.singlePages.filter(page => page.slug === "about")[0];
   const education = allEntries.education;
 
-  console.log("pageContent", pageContent);
+  // console.log("allEntries", allEntries);
 
   const aside = (
     <div>
