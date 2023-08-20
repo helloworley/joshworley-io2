@@ -62,9 +62,10 @@ export const NotionPropertyImage: React.FC<{
           onLoad={() => {
             setIsLoading(false);
             if (onImageLoad) onImageLoad(); // <-- Add this
+            console.log("calling image load");
           }}
           // layout={layout}
-          objectFit={objectFit}
+          // objectFit={objectFit}
         />
       </div>
     </div>
