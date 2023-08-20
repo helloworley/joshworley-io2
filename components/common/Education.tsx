@@ -5,7 +5,15 @@ export default function Education({ education }) {
   return (
     <div className="flex grid-cols-[64px_1fr] items-center gap-2 md:gap-3">
       <div>
-        <NotionPropertyImage image={logo} alt={`${name} logo`} height={64} width={64} cacheCategory="education" cacheProperty="logo" />
+        <NotionPropertyImage
+          image={logo}
+          alt={`${name} logo`}
+          height={64}
+          width={64}
+          cacheCategory="education"
+          cacheProperty="logo"
+          className="rounded-lg"
+        />
       </div>
       <div className="w-full md:flex md:justify-between">
         <div>

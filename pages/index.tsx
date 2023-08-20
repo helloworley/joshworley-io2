@@ -24,7 +24,7 @@ const circleButtons = [
 ];
 
 export default function Home({ allEntries }) {
-  console.log(allEntries);
+  // console.log(allEntries);
   return (
     <SideNavLayout>
       <BlurredBackground image="/default-background.jpeg" className="mt-12 md:mt-0">

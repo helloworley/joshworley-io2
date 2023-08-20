@@ -22,6 +22,7 @@ export default function Home({ allEntries }) {
           alt={`${pageContent.brand} logo`}
           cacheCategory="projects"
           cacheProperty="logo"
+          className="rounded-lg"
         />
       </div>
       <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-1" />

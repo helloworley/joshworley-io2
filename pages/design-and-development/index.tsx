@@ -1,17 +1,11 @@
 import PageLayout from "@/components/layout/PageLayout";
 import { getAllEntries } from "@/lib/notion/notion";
 import TitleDescription from "@/components/common/TitleDescription";
-import ProjectCard from "@/components/project/ProjectCard";
+import ProjectCard from "@/components/common/ProjectCard";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 
 export default function Home({ allEntries }) {
   // console.log("allEntries", allEntries);
-
-  const aside = (
-    <div>
-      <p className="text-white">test</p>
-    </div>
-  );
 
   const content = (
     <div className="grid gap-8">
@@ -19,7 +13,7 @@ export default function Home({ allEntries }) {
         title="Design & Development"
         description="A collection of projects that Josh has designed and/or developed throughout the years. Select a project to learn more about the project goal, design, and implementation."
       />
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2 lg:gap-4">
         {allEntries.projects?.map(project => {
           return <ProjectCard project={project} key={project.name} />;
         })}
@@ -29,7 +23,7 @@ export default function Home({ allEntries }) {
 
   return (
     <BlurredBackground image="/default-background.jpeg">
-      <PageLayout content={content} aside={aside} />
+      <PageLayout content={content} />
     </BlurredBackground>
   );
 }

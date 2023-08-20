@@ -19,7 +19,8 @@ export const NotionPropertyImage: React.FC<{
   className?: string;
   cacheCategory?: string;
   cacheProperty?: string;
-}> = ({ alt, image, width = 800, height = 800, layout = "intrinsic", objectFit = "fill", className, cacheCategory, cacheProperty }) => {
+  onImageLoad?: Function;
+}> = ({ alt, image, width = 800, height = 800, layout = "intrinsic", objectFit = "fill", className, cacheCategory, cacheProperty, onImageLoad }) => {
   const { propertyId, pageId, url, databaseId } = image;
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
@@ -43,7 +44,7 @@ export const NotionPropertyImage: React.FC<{
   };
 
   return (
-    <div className={["h-full w-full", className].join(" ")}>
+    <div className={["h-full w-full"].join(" ")}>
       {isLoading ? (
         <div className="my-auto">
           <LoadingAnimation size={24} minHeight={`min-h-[${height}px]`} />
@@ -55,10 +56,13 @@ export const NotionPropertyImage: React.FC<{
           height={height}
           src={imageSrc}
           alt={alt}
-          className="max-w-fill mx-auto"
+          className={["max-w-fill mx-auto", className].join(" ")}
           onError={handleError}
           unoptimized={true}
-          onLoad={() => setIsLoading(false)}
+          onLoad={() => {
+            setIsLoading(false);
+            if (onImageLoad) onImageLoad(); // <-- Add this
+          }}
           // layout={layout}
           objectFit={objectFit}
         />
