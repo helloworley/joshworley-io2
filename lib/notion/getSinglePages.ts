@@ -1,5 +1,4 @@
-import fs from "fs";
-import { getDatabase, PAGES_CACHE_PATH } from "./notion";
+import { getDatabase } from "./notion";
 export const database = process.env.NOTION_SINGLE_PAGES_DATABASE;
 import { getChildBlocks } from "./getChildBlocks";
 
@@ -24,14 +23,6 @@ export const getSinglePages = async () => {
   };
   const transformedPages = result.map((page, i) => transformPage(page, allChildBlocks[i]));
   const orderedPages = transformedPages.sort((a, b) => b.name - a.name);
-
-  try {
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
-    console.log("Wrote to notionpages cache");
-  } catch (error) {
-    console.log("ERROR WRITING PAGES CACHE TO FILE");
-    console.log(error);
-  }
 
   return orderedPages;
 };

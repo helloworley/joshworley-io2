@@ -1,5 +1,4 @@
-import fs from "fs";
-import { getDatabase, PAGES_CACHE_PATH } from "./notion";
+import { getDatabase } from "./notion";
 export const database = process.env.NOTION_PROJECTS_DATABASE;
 import { getChildBlocks } from "./getChildBlocks";
 
@@ -11,7 +10,12 @@ export const getProjects = async () => {
 
   const transformPage = (page, childBlocks) => {
     return {
-      // page: page,
+      page: page,
+      id: page.id,
+      cover: {
+        pageId: page.id,
+        url: page.cover?.file.url,
+      },
       decision: page.properties.Decision?.select?.name,
       brand: page.properties.Brand?.rich_text[0]?.plain_text ?? "",
       brand_about: page.properties["Brand About"]?.rich_text[0]?.plain_text ?? "",
@@ -46,14 +50,6 @@ export const getProjects = async () => {
   const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocks[i]));
   const sortedPages = transformedPages.filter(page => page.decision === "Include");
   const orderedPages = sortedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  try {
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
-    console.log("Wrote to notionpages cache");
-  } catch (error) {
-    console.log("ERROR WRITING PAGES CACHE TO FILE");
-    console.log(error);
-  }
 
   return orderedPages;
 };

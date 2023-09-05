@@ -1,4 +1,4 @@
-import { NotionPropertyImageTypes } from "@/components/common/NotionPropertyImage";
+import { NotionPropertyImageTypes } from "@/components/image/NotionPropertyImage";
 
 export default function BlurredBackground({
   children,

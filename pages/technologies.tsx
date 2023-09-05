@@ -1,12 +1,9 @@
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllEntries } from "@/lib/notion/notion";
 import TitleDescription from "@/components/common/TitleDescription";
 import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 
-export default function Home({ allEntries }) {
-  // console.log("allEntries", allEntries);
-
+export default function Home({ data }) {
   const content = (
     <>
       <TitleDescription
@@ -15,7 +12,7 @@ export default function Home({ allEntries }) {
         into projects using these technologies and contributing immediately."
       />
       <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
-        {allEntries.technologies?.map(tech => {
+        {data.technologies?.map(tech => {
           return <Technology tech={tech} key={tech.name} />;
         })}
       </div>
@@ -30,10 +27,22 @@ export default function Home({ allEntries }) {
 }
 
 export const getStaticProps = async () => {
-  const allEntries = await getAllEntries();
+  try {
+    const response = await fetch("http://localhost:3000/api/notion");
+    const data = await response.json();
 
-  return {
-    props: { allEntries },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        data,
+      },
+      revalidate: 3600, // Re-generate the page every 1 hour
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NotionBlockImage } from "./NotionBlockImage";
+import { NotionBlockImage } from "@/components/image/NotionBlockImage";
 
 const getPlainText = richText => {
   return richText && richText.length > 0 ? richText[0].plain_text : "";
@@ -72,7 +72,7 @@ const RenderBlock = ({ block, allBlocks }) => {
         );
       } else {
         return (
-          <div key={block.id} className=" max-w-4xl py-2">
+          <div key={block.id} className="max-w-4xl py-2 text-white">
             {value.rich_text.map((text, i) => {
               if (!text.plain_text) return null;
 
@@ -81,13 +81,13 @@ const RenderBlock = ({ block, allBlocks }) => {
               isStrikethrough = text.annotations.strikethrough ? "line-through" : "";
               isUnderline = text.annotations.underline ? "underline" : "";
               const formattedText = (
-                <p key={i} className={`${isBold} ${isItalic} ${isStrikethrough} ${isUnderline} text-white`}>
+                <p key={i} className={`${isBold} ${isItalic} ${isStrikethrough} ${isUnderline} inline`}>
                   {text.plain_text}
                 </p>
               );
 
               return text.href ? (
-                <a href={text.href} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline hover:text-blue-800" key={i}>
+                <a href={text.href} target="_blank" rel="noopener noreferrer" className="text-mist-60 inline underline hover:text-white" key={i}>
                   {formattedText}
                 </a>
               ) : (
@@ -130,7 +130,7 @@ const RenderBlock = ({ block, allBlocks }) => {
 
       return (
         <span>
-          <li key={block.id} className="max-w-4xl py-1  text-white ">
+          <li key={block.id} className="max-w-4xl py-1 text-white">
             {value.rich_text.map((text, i) => {
               if (!text.plain_text) return null;
 

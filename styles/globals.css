@@ -35,8 +35,10 @@ h6 {
   font-family: "Big Moore", serif;
 }
 
-p {
-  font-family: "bigmoore", serif;
+p,
+li {
+  font-family: "basic-sans", serif;
+  @apply leading-6;
 }
 
 .masonry-item {

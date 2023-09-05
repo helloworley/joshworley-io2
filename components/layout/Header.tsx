@@ -38,7 +38,7 @@ export const menuItemsData = [
 export default function Header() {
   return (
     <>
-      <nav id="header" className="bg-smoke-70 fixed top-0 z-50 w-full backdrop-blur-2xl">
+      <nav id="header" className="bg-smoke-60 fixed top-0 z-50 w-full backdrop-blur-2xl">
         <div className="mx-auto flex h-16 items-center justify-between px-4 md:h-[64px] md:px-5 lg:px-10">
           <div>
             <Link href="/" className="text-gray-90 flex items-center gap-3">

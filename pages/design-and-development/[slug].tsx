@@ -1,16 +1,20 @@
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllEntries } from "@/lib/notion/notion";
 import { useRouter } from "next/router";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
 import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
-import { NotionPropertyImage } from "@/components/common/NotionPropertyImage";
+import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
+import { NotionCoverImage } from "@/components/image/NotionCoverImage";
 
-export default function Home({ allEntries }) {
+export default function Home({ data }) {
   const router = useRouter();
   const { slug } = router.query;
-  const pageContent = allEntries.projects.filter(page => slug === page.slug)[0];
+  const pageContent = data.projects.filter(page => slug === page.slug)[0];
+
+  const cover = pageContent.cover.url && (
+    <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full rounded-xl shadow-2xl" />
+  );
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
@@ -54,14 +58,15 @@ export default function Home({ allEntries }) {
 
   return (
     <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
-      <PageLayout content={content} aside={aside} />
+      <PageLayout content={content} aside={aside} cover={cover} />
     </BlurredBackground>
   );
 }
 
 export const getStaticPaths = async () => {
-  const allPages = await getAllEntries();
-  const paths = allPages.projects.map(item => ({
+  const response = await fetch("http://localhost:3000/api/notion");
+  const data = await response.json();
+  const paths = data.projects.map(item => ({
     params: { slug: item.slug },
   }));
   return {
@@ -71,10 +76,22 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async () => {
-  const allEntries = await getAllEntries();
+  try {
+    const response = await fetch("http://localhost:3000/api/notion");
+    const data = await response.json();
 
-  return {
-    props: { allEntries },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        data,
+      },
+      revalidate: 3600, // Re-generate the page every 1 hour
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };

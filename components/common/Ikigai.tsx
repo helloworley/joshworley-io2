@@ -25,7 +25,7 @@ export default function Ikigai() {
         <div className="flex h-full items-center justify-center">
           <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`} style={{ animation: "rotate 80s linear infinite" }}>
             <path id="circlePath" d={`M${w / 2} 0 a${w / 2} ${w / 2} 0 0 1 0 ${w} a${w / 2} ${w / 2} 0 0 1 0 -${w}`} fill="transparent" />
-            <text text-anchor="middle" fill="white" font-size="16" font-family="Basic Sans" letter-spacing="7.15" dy="20">
+            <text textAnchor="middle" fill="white" fontSize="16" fontFamily="Basic Sans" letterSpacing="7.15" dy="20">
               <textPath href="#circlePath" startOffset="50%">
                 {rotatingText}
               </textPath>
@@ -54,7 +54,7 @@ export default function Ikigai() {
         <div className="flex h-full items-center justify-center">
           <svg width={w} height={w} viewBox={`0 0 ${w} ${w}`} style={{ animation: "rotate 80s linear infinite" }}>
             <path id="circlePath" d={`M${w / 2} 0 a${w / 2} ${w / 2} 0 0 1 0 ${w} a${w / 2} ${w / 2} 0 0 1 0 -${w}`} fill="transparent" />
-            <text text-anchor="middle" fill="white" font-size="16" font-family="Basic Sans" letter-spacing="7.15" dy="20">
+            <text textAnchor="middle" fill="white" fontSize="16" fontFamily="Basic Sans" letterSpacing="7.15" dy="20">
               <textPath href="#circlePath" startOffset="50%">
                 {rotatingText}
               </textPath>

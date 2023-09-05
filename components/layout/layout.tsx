@@ -17,7 +17,7 @@ export default function RootLayout({ children, socials }: RootLayoutProps) {
       <div className="bg-gray-1200 bottom-0 mb-0">
         <div className="">
           <Header />
-          <div className="pt-16">{children}</div>
+          <div>{children}</div>
           {/* <Footer /> */}
         </div>
       </div>

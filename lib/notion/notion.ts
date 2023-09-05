@@ -69,24 +69,24 @@ export async function getAllEntries() {
     console.log("Notion Pages cache not initialized. Pages will be fetched now. It may take up to 10 minutes");
   }
 
-  if (!cachedData) {
-    const projects = JSON.parse(JSON.stringify(await getProjects()));
-    const technologies = JSON.parse(JSON.stringify(await getTechnologies()));
-    const photography = JSON.parse(JSON.stringify(await getPhotography()));
-    const singlePages = JSON.parse(JSON.stringify(await getSinglePages()));
-    const education = JSON.parse(JSON.stringify(await getEducation()));
-    cachedData = {
-      projects: projects,
-      technologies: technologies,
-      photography: photography,
-      singlePages: singlePages,
-      education: education,
-    };
+  // if (!cachedData) {
+  const projects = JSON.parse(JSON.stringify(await getProjects()));
+  const technologies = JSON.parse(JSON.stringify(await getTechnologies()));
+  const photography = JSON.parse(JSON.stringify(await getPhotography()));
+  const singlePages = JSON.parse(JSON.stringify(await getSinglePages()));
+  const education = JSON.parse(JSON.stringify(await getEducation()));
+  cachedData = {
+    projects: projects,
+    technologies: technologies,
+    photography: photography,
+    singlePages: singlePages,
+    education: education,
+  };
 
-    // Write the fetched data to the notionpages.json file
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
-  }
-  // console.log("cachedData", cachedData);
+  // Write the fetched data to the notionpages.json file
+  fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
+  // }
+  console.log("cachedData", cachedData);
 
   return cachedData;
 }
@@ -113,6 +113,14 @@ export const getBlockImageSrc = async (blockId: string) => {
 export const getPropertyImageSrc = async (pageId: string, propertyId: string, cacheCategory: string, cacheProperty: string): Promise<string[]> => {
   const response: any = await notionClient.pages.properties.retrieve({ page_id: pageId, property_id: propertyId });
   const newImageSrc = response.files[0]?.file?.url ?? "";
-  await enqueueRewrite(pageId, propertyId, cacheCategory, cacheProperty, newImageSrc);
+  await enqueueRewrite(pageId, cacheCategory, newImageSrc, propertyId, cacheProperty);
+  return newImageSrc;
+};
+
+export const getCoverImageSrc = async (pageId: string, cacheCategory: string): Promise<string[]> => {
+  const response: any = await notionClient.pages.retrieve({ page_id: pageId });
+  const newImageSrc = response.cover?.file.url ?? "";
+  console.log("response", response);
+  await enqueueRewrite(pageId, cacheCategory, newImageSrc);
   return newImageSrc;
 };

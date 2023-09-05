@@ -1,4 +1,3 @@
-import { getAllEntries } from "@/lib/notion/notion";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import CircleButton from "@/components/common/CircleButton";
@@ -23,8 +22,8 @@ const circleButtons = [
   },
 ];
 
-export default function Home({ allEntries }) {
-  // console.log(allEntries);
+export default function Home({ data }) {
+  console.log("data", data);
   return (
     <SideNavLayout>
       <BlurredBackground image="/default-background.jpeg" className="mt-12 md:mt-0">
@@ -33,7 +32,7 @@ export default function Home({ allEntries }) {
             <Ikigai />
             <div className="mx-auto grid grid-cols-2 gap-10 md:grid-cols-4">
               {circleButtons.map(button => {
-                return <CircleButton data={button} />;
+                return <CircleButton data={button} key={button.name} />;
               })}
             </div>
           </div>
@@ -44,10 +43,22 @@ export default function Home({ allEntries }) {
 }
 
 export const getStaticProps = async () => {
-  const allEntries = await getAllEntries();
+  try {
+    const response = await fetch("http://localhost:3000/api/notion");
+    const data = await response.json();
 
-  return {
-    props: { allEntries },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        data,
+      },
+      revalidate: 3600, // Re-generate the page every 1 hour
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };

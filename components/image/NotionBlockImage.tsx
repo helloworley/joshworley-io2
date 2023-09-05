@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "../common/LoadingAnimation";
 
 export const NotionBlockImage: React.FC<{
   src: string;

@@ -1,17 +1,16 @@
 import Image from "next/image";
 import { useState } from "react";
-import LoadingAnimation from "./LoadingAnimation";
+import LoadingAnimation from "../common/LoadingAnimation";
 
-export interface NotionPropertyImageTypes {
-  propertyId: string;
+export interface NotionCoverImageTypes {
   pageId: string;
   url: string;
-  databaseId: string;
+  cacheCategory: string;
 }
 
-export const NotionPropertyImage: React.FC<{
+export const NotionCoverImage: React.FC<{
   alt: string;
-  image: NotionPropertyImageTypes;
+  image: NotionCoverImageTypes;
   width?: number;
   height?: number;
   layout?: "responsive" | "fill" | "fixed" | "intrinsic" | "clamped"; // default is intrinsic
@@ -20,20 +19,16 @@ export const NotionPropertyImage: React.FC<{
   cacheCategory?: string;
   cacheProperty?: string;
   onImageLoad?: Function;
-}> = ({ alt, image, width = 800, height = 800, layout = "intrinsic", objectFit = "fill", className, cacheCategory, cacheProperty, onImageLoad }) => {
-  const { propertyId, pageId, url, databaseId } = image;
+}> = ({ alt, image, width = 320, height = 320, layout = "intrinsic", objectFit = "fill", className, cacheCategory, onImageLoad }) => {
+  const { pageId, url } = image;
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
 
   const handleError = async () => {
     const encodedPageId = encodeURIComponent(pageId);
-    const encodedPropertyId = encodeURIComponent(propertyId);
     const encodedCacheCategory = encodeURIComponent(cacheCategory);
-    const encodedCacheProperty = encodeURIComponent(cacheProperty);
 
-    const res = await fetch(
-      `/api/property-image?pageId=${encodedPageId}&propertyId=${encodedPropertyId}&cacheCategory=${encodedCacheCategory}&cacheProperty=${encodedCacheProperty}`,
-    ).then(res => res.json());
+    const res = await fetch(`/api/cover-image?pageId=${encodedPageId}&cacheCategory=${encodedCacheCategory}`).then(res => res.json());
     const newImageUrl = res?.imageSrc;
 
     if (newImageUrl) {
@@ -62,7 +57,6 @@ export const NotionPropertyImage: React.FC<{
           onLoad={() => {
             setIsLoading(false);
             if (onImageLoad) onImageLoad(); // <-- Add this
-            console.log("calling image load");
           }}
           // layout={layout}
           // objectFit={objectFit}

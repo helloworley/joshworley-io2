@@ -1,4 +1,4 @@
-import { NotionPropertyImage } from "./NotionPropertyImage";
+import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 
 export default function Technology({ tech }) {
   const { name, icon, type, url } = tech;

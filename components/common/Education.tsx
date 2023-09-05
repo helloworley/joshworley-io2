@@ -1,4 +1,4 @@
-import { NotionPropertyImage } from "./NotionPropertyImage";
+import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 
 export default function Education({ education }) {
   const { certification, dateDisplay, location, logo, name } = education;

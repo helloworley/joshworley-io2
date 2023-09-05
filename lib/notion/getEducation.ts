@@ -1,5 +1,4 @@
-import fs from "fs";
-import { getDatabase, PAGES_CACHE_PATH } from "./notion";
+import { getDatabase } from "./notion";
 export const database = process.env.NOTION_EDUCATION_DATABASE;
 
 export const getEducation = async () => {
@@ -22,14 +21,6 @@ export const getEducation = async () => {
   };
   const transformedPages = result.map((page, i) => transformPage(page));
   const orderedPages = transformedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  try {
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(orderedPages), "utf8");
-    console.log("Wrote to notionpages cache");
-  } catch (error) {
-    console.log("ERROR WRITING PAGES CACHE TO FILE");
-    console.log(error);
-  }
 
   return orderedPages;
 };

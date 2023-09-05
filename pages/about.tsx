@@ -1,5 +1,4 @@
 import PageLayout from "@/components/layout/PageLayout";
-import { getAllEntries } from "@/lib/notion/notion";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
 import RenderBlock from "@/components/common/RenderBlock";
@@ -7,11 +6,11 @@ import BlurredBackground from "@/components/layout/BlurredBackground";
 import Image from "next/image";
 import Education from "@/components/common/Education";
 
-export default function Home({ allEntries }) {
-  const pageContent = allEntries.singlePages.filter(page => page.slug === "about")[0];
-  const education = allEntries.education;
+export default function Home({ data }) {
+  const pageContent = data.singlePages.filter(page => page.slug === "about")[0];
+  const education = data.education;
 
-  // console.log("allEntries", allEntries);
+  // console.log("data", data);
 
   const aside = (
     <div>
@@ -49,10 +48,22 @@ export default function Home({ allEntries }) {
 }
 
 export const getStaticProps = async () => {
-  const allEntries = await getAllEntries();
+  try {
+    const response = await fetch("http://localhost:3000/api/notion");
+    const data = await response.json();
 
-  return {
-    props: { allEntries },
-    revalidate: 1,
-  };
+    return {
+      props: {
+        data,
+      },
+      revalidate: 3600, // Re-generate the page every 1 hour
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
 };
