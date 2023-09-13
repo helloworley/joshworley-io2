@@ -9,7 +9,7 @@ interface LoadingAnimationProps {
 
 export { default as ReactLoader } from "react-loading";
 
-export function _Loader({ size, className, theme }: { size: number; className?: string; theme?: "light" | "dark" }) {
+export function _Loader({ size, className }: { size: number; className?: string }) {
   const textColor = "hsl(0, 0%, 50%, 0.5)";
   return <ReactLoading className={["icon text-5xl", className].join(" ")} type="spin" color={textColor} height={size} width={size} />;
 }

@@ -223,7 +223,7 @@ const RenderBlock = ({ block, allBlocks }) => {
         </div>
       );
 
-    case "image":
+    case "image": {
       const imageUrl = value.file.url;
       const imgCaption = value.caption && value.caption[0] ? value.caption[0].plain_text : "";
 
@@ -234,8 +234,9 @@ const RenderBlock = ({ block, allBlocks }) => {
           {imgCaption && <p className="my-4 text-center italic text-gray-600">{imgCaption}</p>}
         </div>
       );
+    }
 
-    case "video":
+    case "video": {
       const videoUrl = value.external.url;
       const vidCaption = value.caption && value.caption[0] ? value.caption[0].plain_text : "";
 
@@ -251,6 +252,7 @@ const RenderBlock = ({ block, allBlocks }) => {
           {vidCaption && <p className="my-4 text-center italic text-gray-600">{vidCaption}</p>}
         </div>
       );
+    }
 
     case "toggle":
       return <ToggleBlock block={block} allBlocks={allBlocks} />;
