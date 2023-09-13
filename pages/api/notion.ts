@@ -37,8 +37,9 @@ export async function fetchDataWithRetry(fn, retries = 3, interval = 1000) {
 
 export const getDatabase = async databaseId => {
   let startCursor = undefined;
-  let results = [];
-  while (true) {
+  let hasMore = true;
+  const results = [];
+  while (hasMore) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>
       notionClient.databases.query({
@@ -48,7 +49,7 @@ export const getDatabase = async databaseId => {
     );
     results.push(...response.results);
     if (!response.has_more) {
-      break;
+      hasMore = false;
     }
     startCursor = response.next_cursor;
   }
