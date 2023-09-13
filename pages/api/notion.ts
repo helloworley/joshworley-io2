@@ -78,7 +78,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       education,
     };
 
-    cache.put("notionData", cachedData, 3600000); // Cache for 1 hour
+    cache.put("notionData", cachedData, 1800000); // Cache for 30 min
     res.status(200).json(cachedData);
   } catch (error) {
     console.error(error);
