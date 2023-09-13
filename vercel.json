@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://joshworley.io; font-src 'self' https://use.typekit.net https://p.typekit.net; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://vitals.vercel-insights.com"
+          "value": "default-src 'self'; img-src 'self' https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://joshworley.io; font-src 'self' https://use.typekit.net https://p.typekit.net; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net; connect-src 'self' https://vitals.vercel-insights.com"
         },
         {
           "key": "X-Content-Type-Options",
