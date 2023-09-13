@@ -57,6 +57,9 @@ export default function Home({ data }) {
 export const getStaticProps = async () => {
   try {
     const response = await fetch(process.env.NEXT_NOTION_API_URL);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok ${response.statusText}`);
+    }
     const data = await response.json();
 
     return {
