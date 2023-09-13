@@ -35,6 +35,8 @@ export default function Home({ data }) {
                 cacheCategory="photography"
                 cacheProperty="image"
                 onImageLoad={handleImageLoad}
+                width={2000}
+                height={2000}
               />
             </div>
           ))}
