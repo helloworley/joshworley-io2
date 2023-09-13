@@ -1,6 +1,6 @@
 import { notionClient, rateLimiter, fetchDataWithRetry } from "./notion";
 
-const fetchChildBlocks = async (blockId: string, level: number = 0) => {
+const fetchChildBlocks = async (blockId: string, level = 0) => {
   console.log(`Fetching child blocks of ${blockId} at level ${level}`);
   if (level > 2) {
     console.log(`Blocks with ID ${blockId} are at level ${level} will not be fetched at this time.`);
@@ -8,9 +8,9 @@ const fetchChildBlocks = async (blockId: string, level: number = 0) => {
   }
 
   let startCursor = undefined;
-  let children = [];
-
-  while (true) {
+  const children = [];
+  let hasMore = true;
+  while (hasMore) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>
       notionClient.blocks.children.list({
@@ -21,7 +21,7 @@ const fetchChildBlocks = async (blockId: string, level: number = 0) => {
     children.push(...response.results);
 
     for (let i = 0; i < response.results.length; i++) {
-      let child = response.results[i];
+      const child = response.results[i];
       if ("has_children" in child && child.has_children) {
         if ("id" in child) {
           const grandChildren = await fetchChildBlocks(child.id, level + 1);
@@ -36,7 +36,7 @@ const fetchChildBlocks = async (blockId: string, level: number = 0) => {
 
     if (!response.has_more) {
       console.log(`Finished fetching child blocks of ${blockId} at level ${level}`);
-      break;
+      hasMore = false;
     }
     startCursor = response.next_cursor;
   }
