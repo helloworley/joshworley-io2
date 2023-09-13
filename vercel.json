@@ -24,10 +24,6 @@
           "value": "0"
         },
         {
-          "key": "Referrer-Policy",
-          "value": "strict-origin"
-        },
-        {
           "key": "Permissions-Policy",
           "value": "autoplay=*"
         }
