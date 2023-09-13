@@ -20,8 +20,24 @@ export const NotionPropertyImage: React.FC<{
   cacheCategory?: string;
   cacheProperty?: string;
   onImageLoad?: any;
-}> = ({ alt, image, width = 800, height = 800, layout = "intrinsic", objectFit = "fill", className, cacheCategory, cacheProperty, onImageLoad }) => {
-  const { propertyId, pageId, url, databaseId } = image;
+}> = ({
+  alt,
+  image,
+  width = 800,
+  height = 800,
+  // layout = "intrinsic",
+  // objectFit = "fill",
+  className,
+  cacheCategory,
+  cacheProperty,
+  onImageLoad,
+}) => {
+  const {
+    propertyId,
+    pageId,
+    url,
+    // databaseId
+  } = image;
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
 

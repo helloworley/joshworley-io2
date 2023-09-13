@@ -2,11 +2,10 @@ import { PropsWithChildren } from "react";
 import Head from "next/head";
 
 import Header from "@/components/layout/Header";
-// import Footer from "@/components/layout/Footer";
 
 type RootLayoutProps = PropsWithChildren<any>;
 
-export default function RootLayout({ children, socials }: RootLayoutProps) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <Head>
@@ -18,7 +17,6 @@ export default function RootLayout({ children, socials }: RootLayoutProps) {
         <div className="">
           <Header />
           <div>{children}</div>
-          {/* <Footer /> */}
         </div>
       </div>
     </>
