@@ -43,7 +43,7 @@ export const menuItemsData = [
     showOnDesktop: true,
   },
   {
-    link: "https://file.notion.so/f/s/f2e6822f-6831-4908-8747-151b0f2d24f3/joshua_worley_resume_210326.pdf?id=945d4e6e-d0ab-436a-8e98-39b53b1efbc7&table=block&spaceId=4817a77d-0789-45fb-81c6-86cd20f57143&expirationTimestamp=1692230400000&signature=8-H-FJchGrp_7pdkPFPkDZiXRzUeKpHUbDBs22CfiwI&downloadName=joshua_worley_resume_210326.pdf",
+    link: "https://drive.google.com/file/d/1fcSVZ3M1go1M1OUeZ8VAQmZk5mKuLvjT/view?usp=sharing",
     name: "Resume",
     showOnDesktop: true,
   },

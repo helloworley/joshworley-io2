@@ -6,8 +6,13 @@ const nextConfig = {
     workerThreads: false,
     cpus: 1,
   },
+  experimental: {
+    images: {
+      allowFutureImage: true,
+    },
+  },
   images: {
-    domains: ["s3.us-west-2.amazonaws.com"],
+    domains: ["joshworley.io"],
   },
   webpack(config) {
     config.module.rules.push({
