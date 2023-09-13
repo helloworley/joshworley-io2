@@ -24,16 +24,16 @@ const circleButtons = [
   },
 ];
 
-export default function Home({ data }) {
-  const [loading, setLoading] = useState(!data);
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
-  }, [data]);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+export default function Home() {
+  // const [loading, setLoading] = useState(!data);
+  // useEffect(() => {
+  //   if (data) {
+  //     setLoading(false);
+  //   }
+  // }, [data]);
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
     <>
@@ -59,23 +59,23 @@ export default function Home({ data }) {
   );
 }
 
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const data = await response.json();
+// export const getStaticProps = async () => {
+//   try {
+//     const response = await fetch(process.env.NEXT_NOTION_API_URL);
+//     const data = await response.json();
 
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
+//     return {
+//       props: {
+//         data,
+//       },
+//       revalidate: 3600, // Re-generate the page every 1 hour
+//     };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
 };
