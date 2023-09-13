@@ -35,7 +35,7 @@ const ToggleBlock = ({ block, allBlocks }) => {
       </div>
 
       <div className="my-2 ml-7 max-w-3xl">
-        {isOpen && block.children.map(childBlock => <RenderBlock block={childBlock} allBlocks={allBlocks} />)}
+        {isOpen && block.children.map((childBlock, i) => <RenderBlock block={childBlock} allBlocks={allBlocks} key={i} />)}
       </div>
     </div>
   );
