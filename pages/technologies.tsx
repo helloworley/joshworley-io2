@@ -1,3 +1,4 @@
+import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import TitleDescription from "@/components/common/TitleDescription";
 import Technology from "@/components/common/Technology";

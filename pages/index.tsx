@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";
@@ -35,7 +36,6 @@ export default function Home({ data }) {
     return <div>Loading...</div>;
   }
 
-  console.log("data", data);
   return (
     <>
       <Seo
