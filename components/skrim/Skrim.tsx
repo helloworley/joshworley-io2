@@ -1,3 +1,4 @@
+import React from "react";
 import { default as dynamic } from "next/dynamic";
 import { SetStateAction } from "react";
 
