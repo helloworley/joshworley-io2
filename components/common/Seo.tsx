@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 import { useEffect, useState } from "react";
 
-export default function Seo({ title, image, description, url }: { title?: string; image?: string; description?: string; url?: string }) {
+export default function Seo({ title, description }: { title?: string; description?: string }) {
   const [currentUrl, setCurrentUrl] = useState("");
   useEffect(() => {
     if (typeof window !== "undefined") {

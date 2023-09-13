@@ -1,9 +1,7 @@
 import ReactLoading from "react-loading";
 
 interface LoadingAnimationProps {
-  theme?: "light" | "dark";
   message?: string;
-  size?: number;
   padding?: number;
   minHeight?: string;
   className?: string;
@@ -17,7 +15,7 @@ export function _Loader({ size, className, theme }: { size: number; className?: 
 }
 
 const LoadingAnimation = (props: LoadingAnimationProps) => {
-  const { theme = "light", size = 88, className, minHeight = "min-h-[400px]" } = props; // padding defaults to 88
+  const { className, minHeight = "min-h-[400px]" } = props; // padding defaults to 88
   // const _minHeight = `min-h-[${minHeight}px]`;
   return (
     <div className={[`grid h-full w-full flex-grow place-items-center`, minHeight, className].join(" ")}>

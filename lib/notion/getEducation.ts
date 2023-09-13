@@ -19,7 +19,7 @@ export const getEducation = async () => {
       },
     };
   };
-  const transformedPages = result.map((page, i) => transformPage(page));
+  const transformedPages = result.map(page => transformPage(page));
   const orderedPages = transformedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return orderedPages;

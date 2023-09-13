@@ -27,7 +27,7 @@ const rewriteCacheUrl = async (pageId: string, propertyId: string, cacheCategory
   // if it's a notion property image
   if (propertyId) {
     // load the cached data
-    let cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
+    const cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
     // find the specific entry in the cacheCategory array
     const entry = cachedData[cacheCategory].find(item => item[cacheProperty].pageId === pageId && item[cacheProperty].propertyId === propertyId);
     // update the URL if the entry is found
@@ -43,7 +43,7 @@ const rewriteCacheUrl = async (pageId: string, propertyId: string, cacheCategory
     // else if it's a page cover image
   } else {
     // load the cached data
-    let cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
+    const cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
     // find the specific entry in the cacheCategory array
     const entry = cachedData[cacheCategory].find(item => item.pageId === pageId);
     // update the URL if the entry is found

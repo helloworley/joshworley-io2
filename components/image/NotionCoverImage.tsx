@@ -19,7 +19,17 @@ export const NotionCoverImage: React.FC<{
   cacheCategory?: string;
   cacheProperty?: string;
   onImageLoad?: any;
-}> = ({ alt, image, width = 320, height = 320, layout = "intrinsic", objectFit = "fill", className, cacheCategory, onImageLoad }) => {
+}> = ({
+  alt,
+  image,
+  width = 320,
+  height = 320,
+  // layout = "intrinsic",
+  // objectFit = "fill",
+  className,
+  cacheCategory,
+  onImageLoad,
+}) => {
   const { pageId, url } = image;
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
@@ -42,7 +52,7 @@ export const NotionCoverImage: React.FC<{
     <div className={["h-full w-full"].join(" ")}>
       {isLoading ? (
         <div className="my-auto">
-          <LoadingAnimation size={24} minHeight={`min-h-[${height}px]`} />
+          <LoadingAnimation minHeight={`min-h-[${height}px]`} />
         </div>
       ) : null}
       <div style={{ opacity: isLoading ? 0 : 1, height: isLoading ? 0 : "auto" }}>

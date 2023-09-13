@@ -17,7 +17,7 @@ export const getTechnologies = async () => {
       },
     };
   };
-  const transformedPages = result.map((page, i) => transformPage(page));
+  const transformedPages = result.map(page => transformPage(page));
   const orderedPages = transformedPages.sort((a, b) => a.name.localeCompare(b.name));
 
   return orderedPages;

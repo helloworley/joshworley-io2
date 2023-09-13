@@ -18,7 +18,7 @@ export const getPhotography = async () => {
       },
     };
   };
-  const transformedPages = liveImages.map((page, i) => transformPage(page));
+  const transformedPages = liveImages.map(page => transformPage(page));
   const orderedPages = transformedPages.sort((a, b) => a.name.localeCompare(b.name));
 
   return orderedPages;
