@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";

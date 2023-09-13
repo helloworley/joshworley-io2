@@ -1,4 +1,3 @@
-import React from "react";
 import { menuItemsData } from "./Header";
 import HeaderMenuLink from "./HeaderMenuLink";
 

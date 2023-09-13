@@ -1,7 +1,7 @@
 import fs from "fs";
 import { PAGES_CACHE_PATH } from "./notion";
 
-let queue = [];
+const queue = [];
 let isRunning = false;
 
 // create a queue for ensuring requests are handled synchronously

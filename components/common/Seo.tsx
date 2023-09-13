@@ -1,5 +1,4 @@
 import { NextSeo } from "next-seo";
-import React from "react";
 import { useEffect, useState } from "react";
 
 export default function Seo({ title, image, description, url }: { title?: string; image?: string; description?: string; url?: string }) {

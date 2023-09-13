@@ -1,4 +1,3 @@
-import React from "react";
 import { useSkrimContext } from "@/components/skrim/SkrimProvider";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 import Icon from "@/components/common/Icon";

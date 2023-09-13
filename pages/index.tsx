@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";

@@ -37,7 +37,7 @@ export async function fetchDataWithRetry(fn, retries = 3, interval = 1000) {
 
 export const getDatabase = async databaseId => {
   let startCursor = undefined;
-  let results = [];
+  const results = [];
   while (true) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>

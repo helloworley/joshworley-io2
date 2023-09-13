@@ -1,4 +1,3 @@
-import React from "react";
 import { useSkrimContext } from "@/components/skrim/SkrimProvider";
 
 export const ModalFrame = ({

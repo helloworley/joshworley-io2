@@ -1,4 +1,3 @@
-import React from "react";
 import PageLayout from "@/components/layout/PageLayout";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";

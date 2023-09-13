@@ -1,4 +1,3 @@
-import React from "react";
 import { deepEqual } from "@/lib/helpers";
 
 export type SkrimOption = {

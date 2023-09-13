@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 export default function CircleButton({ data }: { data: { name: string; link: string; className?: string } }) {
   const { name, link, className } = data;
