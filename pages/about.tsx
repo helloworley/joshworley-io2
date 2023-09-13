@@ -66,7 +66,7 @@ export const getStaticProps = async () => {
       props: {
         data,
       },
-      revalidate: 3600, // Re-generate the page every 1 hour
+      revalidate: 1800, // Re-generate the page every 1 hour
     };
   } catch (error) {
     console.error("Error fetching data:", error);
