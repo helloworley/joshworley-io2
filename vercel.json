@@ -4,26 +4,36 @@
       "source": "/(.*)",
       "headers": [
         {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://joshworley.io"
-        },
-        {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self' data: https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://joshworley.io; font-src 'self' data: https://p.typekit.net https://use.typekit.net; style-src 'self' 'unsafe-inline' https://p.typekit.net https://use.typekit.net; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://use.typekit.net https://vercel.live; connect-src 'self' https://vitals.vercel-insights.com https://www.google-analytics.com https://use.typekit.net; frame-src 'self' https://www.youtube.com https://vercel.live;"
+          "value": "default-src 'self'; img-src 'self' https://prod-files-secure.s3.us-west-2.amazonaws.com https://s3.us-west-2.amazonaws.com https://joshworley.io; font-src 'self' https://use.typekit.net https://p.typekit.net; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://vitals.vercel-insights.com"
         },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
         {
-          "key": "Referrer-Policy",
-          "value": "strict-origin"
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
         },
         {
-          "key": "Permissions-Policy",
-          "value": "autoplay=*"
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
         }
       ]
     }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/_next/static/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=31536000,immutable"
+      }
+    }
+  ],
+  "reactStrictMode": true,
+  "trailingSlash": false
 }
