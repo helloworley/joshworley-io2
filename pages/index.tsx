@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import CircleButton from "@/components/common/CircleButton";
@@ -78,4 +78,4 @@ export default function Home() {
 //       },
 //     };
 //   }
-};
+// };
