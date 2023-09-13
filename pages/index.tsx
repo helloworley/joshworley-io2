@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import CircleButton from "@/components/common/CircleButton";
@@ -24,17 +23,7 @@ const circleButtons = [
   },
 ];
 
-export default function Home({ data }) {
-  const [loading, setLoading] = useState(!data);
-  useEffect(() => {
-    if (data) {
-      setLoading(false);
-    }
-  }, [data]);
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+export default function Home() {
   return (
     <>
       <Seo
@@ -58,27 +47,3 @@ export default function Home({ data }) {
     </>
   );
 }
-
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok ${response.statusText}`);
-    }
-    const data = await response.json();
-
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
-};
