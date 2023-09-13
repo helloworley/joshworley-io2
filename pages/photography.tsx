@@ -26,7 +26,7 @@ export default function Home({ data }) {
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
-        <div className="masonry-grid mt-20 min-h-[800px] lg:mt-12">
+        <div className="masonry-grid mt-16 min-h-[800px] lg:mt-12">
           {data.photography.map(photo => (
             <div className="masonry-item" key={photo.name}>
               <NotionPropertyImage

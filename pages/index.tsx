@@ -31,9 +31,9 @@ export default function Home() {
         description="Welcome to Josh Worley's portfolio website. Browse design and development projects, view photography, and learn more about his experience."
       />
       <SideNavLayout>
-        <BlurredBackground image="/default-background.jpeg" className="mt-12 md:mt-0">
+        <BlurredBackground image="/default-background.jpeg">
           <div className="md:flex md:h-screen md:items-center md:justify-center">
-            <div className="flex flex-col items-center gap-16 pb-20">
+            <div className="flex flex-col items-center gap-16 py-20 pb-20">
               <Ikigai />
               <div className="mx-auto grid grid-cols-2 gap-10 md:grid-cols-4">
                 {circleButtons.map(button => {
