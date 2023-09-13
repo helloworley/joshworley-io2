@@ -47,30 +47,3 @@ export default function Home() {
     </>
   );
 }
-<<<<<<< HEAD
-=======
-
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok - ${response.statusText}`);
-    }
-    const data = await response.json();
-
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
-};
->>>>>>> release
