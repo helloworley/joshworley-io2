@@ -2,16 +2,16 @@ import PageLayout from "@/components/layout/PageLayout";
 import TitleDescription from "@/components/common/TitleDescription";
 import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
+import Seo from "@/components/common/Seo";
 
 export default function Home({ data }) {
   const content = (
     <>
       <TitleDescription
         title="Technologies"
-        description="I have professional experience and working knowledge of the following design applications and frontend technologies. I am comfortable jumping
-        into projects using these technologies and contributing immediately."
+        description="Josh has years of professional experience and working knowledge of the following design applications and frontend technologies."
       />
-      <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {data.technologies?.map(tech => {
           return <Technology tech={tech} key={tech.name} />;
         })}
@@ -20,9 +20,15 @@ export default function Home({ data }) {
   );
 
   return (
-    <BlurredBackground image="/default-background.jpeg">
-      <PageLayout content={content} />
-    </BlurredBackground>
+    <>
+      <Seo
+        title="Technologies"
+        description="Josh has years of professional experience and working knowledge of the following design applications and frontend technologies."
+      />
+      <BlurredBackground image="/default-background.jpeg">
+        <PageLayout content={content} />
+      </BlurredBackground>
+    </>
   );
 }
 

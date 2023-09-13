@@ -5,6 +5,7 @@ import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Image from "next/image";
 import Education from "@/components/common/Education";
+import Seo from "@/components/common/Seo";
 
 export default function Home({ data }) {
   const pageContent = data.singlePages.filter(page => page.slug === "about")[0];
@@ -41,9 +42,15 @@ export default function Home({ data }) {
   );
 
   return (
-    <BlurredBackground image="/default-background.jpeg">
-      <PageLayout content={content} aside={aside} />
-    </BlurredBackground>
+    <>
+      <Seo
+        title="About"
+        description="About Josh Worley. Josh is a Digital Designer, Frontend Developer, and Digital Producer with nearly a decade of professional experience in Japan and the United States."
+      />
+      <BlurredBackground image="/default-background.jpeg">
+        <PageLayout content={content} aside={aside} />
+      </BlurredBackground>
+    </>
   );
 }
 

@@ -6,6 +6,7 @@ import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import { NotionCoverImage } from "@/components/image/NotionCoverImage";
+import Seo from "@/components/common/Seo";
 
 export default function Home({ data }) {
   const router = useRouter();
@@ -57,9 +58,12 @@ export default function Home({ data }) {
   );
 
   return (
-    <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
-      <PageLayout content={content} aside={aside} cover={cover} />
-    </BlurredBackground>
+    <>
+      <Seo title={pageContent.name} description={pageContent.project_about} />
+      <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
+        <PageLayout content={content} aside={aside} cover={cover} />
+      </BlurredBackground>
+    </>
   );
 }
 

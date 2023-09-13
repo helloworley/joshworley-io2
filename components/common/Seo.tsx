@@ -1,71 +1,32 @@
 import { NextSeo } from "next-seo";
 import React from "react";
+import { useEffect, useState } from "react";
 
-interface GenerateSeoPropsArgs {
-  title: string;
-  url: string;
-}
+export default function Seo({ title, image, description, url }: { title?: string; image?: string; description?: string; url?: string }) {
+  const [currentUrl, setCurrentUrl] = useState("");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
 
-export function generateSeoProps({ title, url }: GenerateSeoPropsArgs) {
-  return {
-    fields: {
-      description: "",
-      siteName: "",
-      title: `Josh Worley - ${title}`,
-      image: {
-        fields: {
-          description: `Josh Worley - ${title} OG Image`,
-          // TODO: replace with the absolute URL of the preview image
-          file: {
-            url: "/og-image.png",
-          },
-        },
-      },
-      url,
-    },
-  };
-}
-
-export interface SeoProps {
-  fields: {
-    description: string;
-    siteName: string;
-    title: string;
-    image: {
-      fields: {
-        description: string;
-        file: { url: string };
-      };
-    };
-    url: string;
-  };
-}
-
-interface OtherSeoProps extends SeoProps {
-  titleOverride?: string;
-  urlOverride?: string;
-}
-
-export default function Seo(props: OtherSeoProps) {
-  const { titleOverride = "", urlOverride = "" } = props;
-  const { description, siteName, title, image, url } = props?.fields || {};
   return (
     <NextSeo
-      title={titleOverride || title}
+      title={`${title} | Josh Worley`}
       description={description}
       openGraph={{
         type: "website",
         locale: "en_IE",
-        url: urlOverride || url,
-        site_name: siteName,
-        title: titleOverride || title,
+        url: currentUrl,
+        site_name: "Josh Worley",
+        title: title,
         description: description,
         images: [
           {
-            url: `https:${image?.fields?.file?.url}`,
+            url: "https://joshworley.io/og-image-default.jpg",
             width: 1200,
             height: 628,
-            alt: image?.fields?.description,
+            alt: "Josh Worley's Portfolio Website",
           },
         ],
       }}

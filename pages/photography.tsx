@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
+import Seo from "@/components/common/Seo";
 
 export default function Home({ data }) {
   const handleImageLoad = () => {
@@ -22,21 +23,24 @@ export default function Home({ data }) {
   }, []);
 
   return (
-    <SideNavLayout>
-      <div className="masonry-grid mt-20 min-h-[800px] lg:mt-12">
-        {data.photography.map(photo => (
-          <div className="masonry-item" key={photo.name}>
-            <NotionPropertyImage
-              image={photo.image}
-              alt={photo.name}
-              cacheCategory="photography"
-              cacheProperty="image"
-              onImageLoad={handleImageLoad}
-            />
-          </div>
-        ))}
-      </div>
-    </SideNavLayout>
+    <>
+      <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
+      <SideNavLayout>
+        <div className="masonry-grid mt-20 min-h-[800px] lg:mt-12">
+          {data.photography.map(photo => (
+            <div className="masonry-item" key={photo.name}>
+              <NotionPropertyImage
+                image={photo.image}
+                alt={photo.name}
+                cacheCategory="photography"
+                cacheProperty="image"
+                onImageLoad={handleImageLoad}
+              />
+            </div>
+          ))}
+        </div>
+      </SideNavLayout>
+    </>
   );
 }
 
