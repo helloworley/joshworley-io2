@@ -45,7 +45,7 @@ const fetchChildBlocks = async (blockId: string, level: number = 0) => {
 };
 
 export const getChildBlocks = async pages => {
-  const childBlockPromises = await pages.map(async (page, index, array) => {
+  const childBlockPromises = await pages.map(async (page: any, index: number, array: any[]) => {
     console.log(`Processing page ${index + 1} of ${array.length}`);
 
     const results = await Promise.allSettled([fetchChildBlocks(page.id)]);
