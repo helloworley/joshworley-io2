@@ -21,7 +21,7 @@ export const NotionBlockImage: React.FC<{
     <div className="h-full w-full">
       {isLoading ? (
         <div className="my-auto">
-          <LoadingAnimation size={24} />
+          <LoadingAnimation />
         </div>
       ) : null}
       <div style={{ opacity: isLoading ? 0 : 1, height: isLoading ? 0 : "auto" }}>
