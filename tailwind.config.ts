@@ -61,8 +61,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ['"Big Moore"', "serif"], // Add the default fallback font family if "Big Moore" fails to load
-        "sans-serif": ['"Basic Sans"', "sans-serif"], // Add the default fallback font family if "Basic Sans" fails to load
+        serif: ['"bigmoore"', "serif"], // Add the default fallback font family if "Big Moore" fails to load
+        "sans-serif": ['"basic-sans"', "sans-serif"], // Add the default fallback font family if "Basic Sans" fails to load
       },
       height: {
         "screen-64": "calc(100vh - 64px)",
