@@ -5,7 +5,8 @@
   "rules": {
     "@typescript-eslint/no-explicit-any": 0,
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "@typescript-eslint/no-var-requires": "off"
   },
   "settings": {
     "react": {
