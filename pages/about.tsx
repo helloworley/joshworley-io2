@@ -49,7 +49,7 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/notion");
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
 
     return {

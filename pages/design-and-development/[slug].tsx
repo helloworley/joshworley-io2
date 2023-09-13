@@ -64,7 +64,7 @@ export default function Home({ data }) {
 }
 
 export const getStaticPaths = async () => {
-  const response = await fetch("http://localhost:3000/api/notion");
+  const response = await fetch(process.env.NEXT_NOTION_API_URL);
   const data = await response.json();
   const paths = data.projects.map(item => ({
     params: { slug: item.slug },
@@ -77,7 +77,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/notion");
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
 
     return {

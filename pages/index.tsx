@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import CircleButton from "@/components/common/CircleButton";
@@ -23,6 +24,16 @@ const circleButtons = [
 ];
 
 export default function Home({ data }) {
+  const [loading, setLoading] = useState(!data);
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   console.log("data", data);
   return (
     <SideNavLayout>
@@ -44,7 +55,7 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/notion");
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
 
     return {
