@@ -50,7 +50,7 @@ export default function Header() {
             <div className="flex items-center gap-3">
               {socials.map(social => {
                 return (
-                  <a href={social.link} className="h-6" target="_blank" key={social.name}>
+                  <a href={social.link} className="h-6" target="_blank" rel="noreferrer" key={social.name}>
                     {/* <Image src={social.icon} alt={`Josh Worley's ${social.name}`} width={24} height={24} />; */}
                     <div className="lg:text-mist-40 cursor-pointer text-white hover:text-white">{social.icon}</div>
                   </a>

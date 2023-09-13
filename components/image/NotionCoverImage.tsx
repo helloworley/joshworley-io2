@@ -18,7 +18,7 @@ export const NotionCoverImage: React.FC<{
   className?: string;
   cacheCategory?: string;
   cacheProperty?: string;
-  onImageLoad?: Function;
+  onImageLoad?: any;
 }> = ({ alt, image, width = 320, height = 320, layout = "intrinsic", objectFit = "fill", className, cacheCategory, onImageLoad }) => {
   const { pageId, url } = image;
   const [isLoading, setIsLoading] = useState(true);
