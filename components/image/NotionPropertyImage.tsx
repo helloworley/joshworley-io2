@@ -73,7 +73,7 @@ export const NotionPropertyImage: React.FC<{
           src={imageSrc}
           alt={alt}
           className={["max-w-fill mx-auto", className].join(" ")}
-          onError={handleError}
+          // onError={handleError}
           unoptimized={true}
           onLoad={() => {
             setIsLoading(false);
