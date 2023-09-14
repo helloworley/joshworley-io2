@@ -27,24 +27,24 @@ export const socials = [
 export const menuItemsData = [
   {
     name: "Design & Development",
-    link: "design-and-development",
+    link: "/design-and-development",
   },
   {
     name: "Photography",
-    link: "photography",
+    link: "/photography",
   },
   {
     name: "Technologies",
-    link: "technologies",
+    link: "/technologies",
   },
   {
-    link: "/about",
     name: "About",
+    link: "/about",
     showOnDesktop: true,
   },
   {
-    link: "https://drive.google.com/file/d/1fcSVZ3M1go1M1OUeZ8VAQmZk5mKuLvjT/view?usp=sharing",
     name: "Resume",
+    link: "https://drive.google.com/file/d/1fcSVZ3M1go1M1OUeZ8VAQmZk5mKuLvjT/view?usp=sharing",
     showOnDesktop: true,
   },
 ];
