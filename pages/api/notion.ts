@@ -35,7 +35,14 @@ export async function fetchDataWithRetry(fn, retries = 3, interval = 1000) {
   }
 }
 
-export const getDatabase = async databaseId => {
+interface filterInterface {
+  property: string;
+  select: {
+    equals: string;
+  };
+}
+
+export const getDatabase = async (databaseId: string, filter?: filterInterface) => {
   let startCursor = undefined;
   let hasMore = true;
   const results = [];
@@ -45,6 +52,7 @@ export const getDatabase = async databaseId => {
       notionClient.databases.query({
         database_id: databaseId,
         start_cursor: startCursor,
+        filter: filter,
       }),
     );
     results.push(...response.results);

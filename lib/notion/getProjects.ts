@@ -1,12 +1,18 @@
-import { getDatabase } from "./notion";
+import { getDatabase } from "@/pages/api/notion";
 export const database = process.env.NOTION_PROJECTS_DATABASE;
 import { getChildBlocks } from "./getChildBlocks";
 
+const filter = {
+  property: "Decision",
+  select: {
+    equals: "Include",
+  },
+};
+
 export const getProjects = async () => {
   try {
-    const result = await getDatabase(database);
+    const result = await getDatabase(database, filter);
     const livePages = result.filter(page => page.properties.Decision?.select?.name === "Include");
-    // const allChildBlocks = await Promise.all(livePages.map(page => getChildBlocks(page)));
     const allChildBlocks = await getChildBlocks(livePages);
 
     const transformPage = (page, childBlocks) => {
