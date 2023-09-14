@@ -7,8 +7,9 @@ import BlurredBackground from "@/components/layout/BlurredBackground";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import { NotionCoverImage } from "@/components/image/NotionCoverImage";
 import Seo from "@/components/common/Seo";
+import { truncateString } from "@/lib/helpers";
 
-export default function Home({ data }) {
+export default function Page({ data }) {
   const router = useRouter();
   const { slug } = router.query;
   const pageContent = data.projects.filter(page => slug === page.slug)[0];
@@ -44,7 +45,16 @@ export default function Home({ data }) {
         <LabelContent label="Project Type" content={pageContent.project_type} />
         <LabelContent label="Industry" content={pageContent.industry} />
         <LabelContent label="Position" content={pageContent.position} />
-        <LabelContent label="Link" content="TODO: Link" />
+        {pageContent.url && (
+          <LabelContent
+            label="Link"
+            content={
+              <a href={pageContent.url} target="_blank" rel="noopener noreferrer" className="text-mist-60 inline underline hover:text-white">
+                {truncateString(pageContent.url)}
+              </a>
+            }
+          />
+        )}
       </div>
       <LabelContent label="About the Brand" content={pageContent.brand_about} />
       <LabelContent label="About the Project" content={pageContent.project_about} />

@@ -4,7 +4,7 @@ import ProjectCard from "@/components/common/ProjectCard";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Seo from "@/components/common/Seo";
 
-export default function Home({ data }) {
+export default function Page({ data }) {
   const content = (
     <div className="grid gap-8">
       <TitleDescription

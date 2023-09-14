@@ -38,3 +38,10 @@ export function deepEqual(a, b) {
   }
   return a !== a && b !== b;
 }
+
+export function truncateString(str) {
+  if (str.length > 20) {
+    return str.substring(0, 20) + "...";
+  }
+  return str;
+}
