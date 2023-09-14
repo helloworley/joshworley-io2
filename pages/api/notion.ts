@@ -64,11 +64,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const projects = await getProjects();
-    const technologies = await getTechnologies();
-    const photography = await getPhotography();
-    const singlePages = await getSinglePages();
-    const education = await getEducation();
+    const [projects, technologies, photography, singlePages, education] = await Promise.all([
+      getProjects(),
+      getTechnologies(),
+      getPhotography(),
+      getSinglePages(),
+      getEducation(),
+    ]);
 
     cachedData = {
       projects,
