@@ -1,10 +1,9 @@
-import { useEffect } from "react";
-import imagesLoaded from "imagesloaded";
+// import { useEffect } from "react";
+// import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import Seo from "@/components/common/Seo";
 import { useRef } from "react";
-import Image from "next/image";
 
 export default function Home({ data }) {
   // const handleImageLoad = () => {

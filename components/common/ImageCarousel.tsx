@@ -40,7 +40,7 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ images }) => {
       }
     >
       {images.map((photo, i) => (
-        <div className="flex h-screen max-h-screen w-auto items-center justify-center">
+        <div className="flex h-screen max-h-screen w-auto items-center justify-center" key={i}>
           <NotionPropertyImage
             key={photo.name}
             image={photo.image}

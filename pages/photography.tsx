@@ -1,18 +1,8 @@
 import SideNavLayout from "@/components/layout/SideNavLayout";
-import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import Seo from "@/components/common/Seo";
-import { useRef } from "react";
 import ImageCarousel from "@/components/common/ImageCarousel";
 
 export default function Home({ data }) {
-  const containerRef = useRef(null);
-
-  const handleWheel = e => {
-    if (containerRef.current) {
-      containerRef.current.scrollLeft += e.deltaY;
-    }
-  };
-
   return (
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
