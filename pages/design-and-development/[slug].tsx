@@ -14,9 +14,7 @@ export default function Page({ data }) {
   const { slug } = router.query;
   const pageContent = data.projects.filter(page => slug === page.slug)[0];
 
-  const cover = pageContent.cover.url && (
-    <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full rounded-xl shadow-2xl" />
-  );
+  const cover = pageContent.cover.url && <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full shadow-2xl" />;
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
@@ -31,7 +29,7 @@ export default function Page({ data }) {
           className="rounded-lg"
         />
       </div>
-      <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-1" />
+      <LabelContent label="Technologies" content={pageContent.technologies} className="lg:mt-12" />
     </div>
   );
 
