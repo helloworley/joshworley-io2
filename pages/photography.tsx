@@ -1,46 +1,23 @@
-import { useEffect } from "react";
-import imagesLoaded from "imagesloaded";
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import Seo from "@/components/common/Seo";
+import { useRef } from "react";
+import ImageCarousel from "@/components/common/ImageCarousel";
 
 export default function Home({ data }) {
-  const handleImageLoad = () => {
-    const Masonry = require("masonry-layout");
-    const grid = document.querySelector(".masonry-grid");
-    imagesLoaded(grid, function () {
-      const msnry = new Masonry(grid, {
-        itemSelector: ".masonry-item",
-        columnWidth: ".masonry-item",
-        percentPosition: true,
-      });
-      msnry.layout();
-    });
-  };
+  const containerRef = useRef(null);
 
-  useEffect(() => {
-    handleImageLoad();
-  }, []);
+  const handleWheel = e => {
+    if (containerRef.current) {
+      containerRef.current.scrollLeft += e.deltaY;
+    }
+  };
 
   return (
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
-        <div className="masonry-grid mt-16 min-h-[800px] lg:mt-12">
-          {data.photography.map(photo => (
-            <div className="masonry-item" key={photo.name}>
-              <NotionPropertyImage
-                image={photo.image}
-                alt={photo.name}
-                cacheCategory="photography"
-                cacheProperty="image"
-                onImageLoad={handleImageLoad}
-                width={2000}
-                height={2000}
-              />
-            </div>
-          ))}
-        </div>
+        <ImageCarousel images={data.photography} />
       </SideNavLayout>
     </>
   );

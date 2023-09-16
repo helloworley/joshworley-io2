@@ -54,3 +54,23 @@ li {
     transform: rotate(360deg);
   }
 }
+
+.carousel-root .carousel .control-dots .dot {
+  opacity: 0.1;
+}
+
+.carousel-root .carousel .thumbs-wrapper {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .carousel-root .carousel .thumbs-wrapper {
+    display: block;
+    position: fixed;
+    bottom: 0;
+  }
+}
+
+.carousel-root .carousel .thumb {
+  border: none;
+}

@@ -60,7 +60,7 @@ export const NotionPropertyImage: React.FC<{
   };
 
   return (
-    <div className={["h-full w-full"].join(" ")}>
+    <div className={[""].join(" ")}>
       {isLoading ? (
         <div className="my-auto">
           <LoadingAnimation minHeight={`min-h-[${height}px]`} />
@@ -72,15 +72,12 @@ export const NotionPropertyImage: React.FC<{
           height={height}
           src={imageSrc}
           alt={alt}
-          className={["max-w-fill mx-auto", className].join(" ")}
-          // onError={handleError}
+          className={[className].join(" ")} // Removed mx-auto
           unoptimized={true}
           onLoad={() => {
             setIsLoading(false);
-            if (onImageLoad) onImageLoad(); // <-- Add this
+            if (onImageLoad) onImageLoad();
           }}
-          // layout={layout}
-          // objectFit={objectFit}
         />
       </div>
     </div>
