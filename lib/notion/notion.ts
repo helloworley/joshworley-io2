@@ -87,7 +87,6 @@ export async function getAllEntries() {
   // Write the fetched data to the notionpages.json file
   fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
   // }
-  console.log("cachedData", cachedData);
 
   return cachedData;
 }
@@ -121,7 +120,6 @@ export const getPropertyImageSrc = async (pageId: string, propertyId: string, ca
 export const getCoverImageSrc = async (pageId: string, cacheCategory: string): Promise<string[]> => {
   const response: any = await notionClient.pages.retrieve({ page_id: pageId });
   const newImageSrc = response.cover?.file.url ?? "";
-  console.log("response", response);
   await enqueueRewrite(pageId, cacheCategory, newImageSrc);
   return newImageSrc;
 };

@@ -1,8 +1,6 @@
 import React from "react";
 
 export default function LabelContent({ label, content, className }: { label: string; content: any[] | string | JSX.Element; className?: string }) {
-  console.log("content", content);
-
   const renderContent = () => {
     if (typeof content === "string") {
       return <p className="text-white">{content}</p>;
