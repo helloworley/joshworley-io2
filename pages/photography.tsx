@@ -11,22 +11,22 @@ export default function Home({ data }) {
         <div className="hidden md:block">
           <ImageCarousel images={data.photography} />
         </div>
-        <div className="mt-12 md:hidden">
-          {data.photography.map((photo, i) => (
-            <NotionPropertyImage
-              key={photo.name}
-              image={photo.image}
-              alt={photo.name}
-              cacheCategory="photography"
-              cacheProperty="image"
-              // onImageLoad={handleImageLoad}
-              width={400} // Adjust width as per your requirement
-              height={400} // Adjust height as per your requirement
-              className="max-w-screen mx-auto max-h-screen" // This will prevent the images from shrinking
-            />
-          ))}
-        </div>
       </SideNavLayout>
+      <div className="mt-12 md:hidden">
+        {data.photography.map(photo => (
+          <NotionPropertyImage
+            key={photo.name}
+            image={photo.image}
+            alt={photo.name}
+            cacheCategory="photography"
+            cacheProperty="image"
+            // onImageLoad={handleImageLoad}
+            width={800} // Adjust width as per your requirement
+            height={800} // Adjust height as per your requirement
+            className="max-w-screen mx-auto max-h-screen" // This will prevent the images from shrinking
+          />
+        ))}
+      </div>
     </>
   );
 }

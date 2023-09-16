@@ -16,8 +16,8 @@ export const NotionCoverImage: React.FC<{
   layout?: "responsive" | "fill" | "fixed" | "intrinsic" | "clamped"; // default is intrinsic
   objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down"; // default is fill
   className?: string;
-  cacheCategory?: string;
-  cacheProperty?: string;
+  // cacheCategory?: string;
+  // cacheProperty?: string;
   onImageLoad?: any;
 }> = ({
   alt,
@@ -27,7 +27,7 @@ export const NotionCoverImage: React.FC<{
   // layout = "intrinsic",
   // objectFit = "fill",
   className,
-  cacheCategory,
+  // cacheCategory,
   onImageLoad,
 }) => {
   const { pageId, url } = image;
