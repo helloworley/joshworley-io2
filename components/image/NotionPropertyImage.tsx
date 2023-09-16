@@ -41,23 +41,23 @@ export const NotionPropertyImage: React.FC<{
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
 
-  const handleError = async () => {
-    const encodedPageId = encodeURIComponent(pageId);
-    const encodedPropertyId = encodeURIComponent(propertyId);
-    const encodedCacheCategory = encodeURIComponent(cacheCategory);
-    const encodedCacheProperty = encodeURIComponent(cacheProperty);
+  // const handleError = async () => {
+  //   const encodedPageId = encodeURIComponent(pageId);
+  //   const encodedPropertyId = encodeURIComponent(propertyId);
+  //   const encodedCacheCategory = encodeURIComponent(cacheCategory);
+  //   const encodedCacheProperty = encodeURIComponent(cacheProperty);
 
-    const res = await fetch(
-      `/api/property-image?pageId=${encodedPageId}&propertyId=${encodedPropertyId}&cacheCategory=${encodedCacheCategory}&cacheProperty=${encodedCacheProperty}`,
-    ).then(res => res.json());
-    const newImageUrl = res?.imageSrc;
+  //   const res = await fetch(
+  //     `/api/property-image?pageId=${encodedPageId}&propertyId=${encodedPropertyId}&cacheCategory=${encodedCacheCategory}&cacheProperty=${encodedCacheProperty}`,
+  //   ).then(res => res.json());
+  //   const newImageUrl = res?.imageSrc;
 
-    if (newImageUrl) {
-      setImageSrc(newImageUrl);
-    } else {
-      console.error("Couldn't find the new image URL in the updated cache");
-    }
-  };
+  //   if (newImageUrl) {
+  //     setImageSrc(newImageUrl);
+  //   } else {
+  //     console.error("Couldn't find the new image URL in the updated cache");
+  //   }
+  // };
 
   return (
     <div className={[""].join(" ")}>

@@ -1,13 +1,31 @@
 import SideNavLayout from "@/components/layout/SideNavLayout";
 import Seo from "@/components/common/Seo";
 import ImageCarousel from "@/components/common/ImageCarousel";
+import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 
 export default function Home({ data }) {
   return (
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
-        <ImageCarousel images={data.photography} />
+        <div className="hidden md:block">
+          <ImageCarousel images={data.photography} />
+        </div>
+        <div className="mt-12 md:hidden">
+          {data.photography.map((photo, i) => (
+            <NotionPropertyImage
+              key={photo.name}
+              image={photo.image}
+              alt={photo.name}
+              cacheCategory="photography"
+              cacheProperty="image"
+              // onImageLoad={handleImageLoad}
+              width={400} // Adjust width as per your requirement
+              height={400} // Adjust height as per your requirement
+              className="max-w-screen mx-auto max-h-screen" // This will prevent the images from shrinking
+            />
+          ))}
+        </div>
       </SideNavLayout>
     </>
   );

@@ -34,19 +34,19 @@ export const NotionCoverImage: React.FC<{
   const [isLoading, setIsLoading] = useState(true);
   const [imageSrc, setImageSrc] = useState(url);
 
-  const handleError = async () => {
-    const encodedPageId = encodeURIComponent(pageId);
-    const encodedCacheCategory = encodeURIComponent(cacheCategory);
+  // const handleError = async () => {
+  //   const encodedPageId = encodeURIComponent(pageId);
+  //   const encodedCacheCategory = encodeURIComponent(cacheCategory);
 
-    const res = await fetch(`/api/cover-image?pageId=${encodedPageId}&cacheCategory=${encodedCacheCategory}`).then(res => res.json());
-    const newImageUrl = res?.imageSrc;
+  //   const res = await fetch(`/api/cover-image?pageId=${encodedPageId}&cacheCategory=${encodedCacheCategory}`).then(res => res.json());
+  //   const newImageUrl = res?.imageSrc;
 
-    if (newImageUrl) {
-      setImageSrc(newImageUrl);
-    } else {
-      console.error("Couldn't find the new image URL in the updated cache");
-    }
-  };
+  //   if (newImageUrl) {
+  //     setImageSrc(newImageUrl);
+  //   } else {
+  //     console.error("Couldn't find the new image URL in the updated cache");
+  //   }
+  // };
 
   return (
     <div className={["h-full w-full"].join(" ")}>
