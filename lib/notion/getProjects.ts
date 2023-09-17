@@ -18,7 +18,6 @@ export const getProjects = async () => {
     const transformPage = (page, childBlocks) => {
       const { Decision, Brand, Date, Industry, Name, Position, Slug, Technologies, Logo, URL } = page.properties;
       return {
-        page: page,
         id: page.id,
         cover: {
           pageId: page.id,

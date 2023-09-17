@@ -9,7 +9,6 @@ export const getPhotography = async () => {
   const transformPage = page => {
     return {
       name: page.properties["Name"]?.title?.[0]?.plain_text ?? "",
-      page: page,
       image: {
         url: page.properties.Image?.files[0]?.file?.url ?? "",
         databaseId: page.parent.database_id,
