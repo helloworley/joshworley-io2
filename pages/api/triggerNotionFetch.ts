@@ -5,9 +5,10 @@ export default async function triggerNotionFetch(req: NextApiRequest, res: NextA
   try {
     await notionHandler(req, res, error => {
       if (error) {
-        throw error;
+        console.error("Error triggering Notion fetch:", error);
+      } else {
+        console.log("Fetch success");
       }
-      res.status(200).send("Fetch success");
     });
   } catch (error) {
     console.error("Error triggering Notion fetch:", error);
