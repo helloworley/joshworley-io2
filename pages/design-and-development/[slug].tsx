@@ -85,9 +85,11 @@ export const getStaticPaths = async () => {
       throw new Error(`Network response was not ok - ${response.statusText}`);
     }
     const data = await response.json();
-    const paths = data.map(item => ({
-      params: { slug: item.slug },
-    }));
+    const paths = data
+      .filter(item => item.slug && item.slug !== "design-and-development")
+      .map(item => ({
+        params: { slug: item.slug },
+      }));
     return {
       paths,
       fallback: false,
