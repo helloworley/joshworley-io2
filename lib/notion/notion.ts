@@ -22,7 +22,8 @@ export const notionClient = new Client({
 });
 
 export const rateLimiter = RateLimit(1, {
-  timeUnit: 400,
+  // timeUnit: 400,
+  timeUnit: 333, // Allows up to 3 requests per second
   uniformDistribution: true,
 });
 
