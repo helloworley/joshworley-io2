@@ -64,11 +64,13 @@ export const getDatabase = async (databaseId: string, filter?: filterInterface) 
   return results;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse, callback?: (error?: Error) => void) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse, callback?: (error?: Error) => void, sendResponse: boolean = true) {
   let cachedData = cache.get("notionData");
   console.log("handling");
   if (cachedData) {
-    res.status(200).json(cachedData);
+    if (sendResponse) {
+      res.status(200).json(cachedData);
+    }
     callback && callback();
     return;
   }
@@ -91,7 +93,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
     };
 
     cache.put("notionData", cachedData, 1800000); // Cache for 30 min
-    res.status(200).json(cachedData);
+    if (sendResponse) {
+      res.status(200).json(cachedData);
+    } else {
+      res.status(200).send("Fetch success");
+    }
     callback && callback();
   } catch (error) {
     console.error(error);
