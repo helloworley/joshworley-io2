@@ -64,7 +64,7 @@ export const getDatabase = async (databaseId: string, filter?: filterInterface) 
   return results;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse, callback?: (error?: Error) => void, sendResponse: boolean = true) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse, callback?: (error?: Error) => void, sendResponse = true) {
   let cachedData = cache.get("notionData");
   console.log("handling");
   if (cachedData) {
