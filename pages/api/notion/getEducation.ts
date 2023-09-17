@@ -1,4 +1,4 @@
-import { getDatabase } from "@/pages/api/notion";
+import { getDatabase } from "@/pages/api/notion/notion";
 export const database = process.env.NOTION_EDUCATION_DATABASE;
 
 export const getEducation = async () => {

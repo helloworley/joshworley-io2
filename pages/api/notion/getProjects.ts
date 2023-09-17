@@ -1,6 +1,6 @@
-import { getDatabase } from "@/pages/api/notion";
+import { getDatabase } from "@/pages/api/notion/notion";
 export const database = process.env.NOTION_PROJECTS_DATABASE;
-import { getChildBlocks } from "./getChildBlocks";
+// import { getChildBlocks } from "./getChildBlocks";
 
 const filter = {
   property: "Decision",
@@ -18,10 +18,11 @@ export const getProjects = async () => {
     const result = await getDatabase(database, filter);
     const livePages = result.filter(page => page.properties.Decision?.select?.name === "Include");
     // Fetch child blocks for all live pages in parallel
-    const allChildBlocksPromises = livePages.map(page => getChildBlocks([page]));
-    const allChildBlocksResults = await Promise.all(allChildBlocksPromises);
+    // const allChildBlocksPromises = livePages.map(page => getChildBlocks([page]));
+    // const allChildBlocksResults = await Promise.all(allChildBlocksPromises);
 
-    const transformPage = (page, childBlocks) => {
+    // const transformPage = (page, childBlocks) => {
+    const transformPage = page => {
       const { Decision, Brand, Date, Industry, Name, Position, Slug, Technologies, Logo, URL } = page.properties;
       return {
         id: page.id,
@@ -49,20 +50,21 @@ export const getProjects = async () => {
           propertyId: Logo?.id,
         },
         url: URL?.url ?? "",
-        childBlocks: childBlocks.map(block => {
-          // Remove unnecessary fields from block
-          delete block.created_time;
-          delete block.last_edited_time;
-          delete block.created_by;
-          delete block.last_edited_by;
-          return block;
-        }),
+        // childBlocks: childBlocks.map(block => {
+        //   // Remove unnecessary fields from block
+        //   delete block.created_time;
+        //   delete block.last_edited_time;
+        //   delete block.created_by;
+        //   delete block.last_edited_by;
+        //   return block;
+        // }),
       };
     };
 
     // 3
     // Now, allChildBlocksResults is an array of arrays, so we use allChildBlocksResults[i][0] to get the child blocks for each page
-    const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocksResults[i][0]));
+    // const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocksResults[i][0]));
+    const transformedPages = livePages.map((page, i) => transformPage(page));
 
     // Filter and sort pages
     const sortedPages = transformedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

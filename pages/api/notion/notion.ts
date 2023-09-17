@@ -1,11 +1,11 @@
 import { Client } from "@notionhq/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import cache from "memory-cache";
-import { getProjects } from "@/lib/notion/getProjects";
-import { getTechnologies } from "@/lib/notion//getTechnologies";
-import { getPhotography } from "@/lib/notion//getPhotography";
-import { getSinglePages } from "@/lib/notion//getSinglePages";
-import { getEducation } from "@/lib/notion//getEducation";
+import { getProjects } from "@/pages/api/notion/getProjects";
+import { getTechnologies } from "@/pages/api/notion/getTechnologies";
+import { getPhotography } from "@/pages/api/notion/getPhotography";
+import { getSinglePages } from "@/pages/api/notion/getSinglePages";
+import { getEducation } from "@/pages/api/notion/getEducation";
 import { RateLimit } from "async-sema";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
@@ -35,14 +35,17 @@ export async function fetchDataWithRetry(fn, retries = 3, interval = 1000) {
   }
 }
 
-interface filterInterface {
-  property: string;
-  select: {
-    equals: string;
-  };
-}
+// interface filterInterface {
+//   property: string;
+//   select: {
+//     equals: string;
+//   };
+//   text: {
+//     equals: string;
+//   };
+// }
 
-export const getDatabase = async (databaseId: string, filter?: filterInterface) => {
+export const getDatabase = async (databaseId: string, filter?: any) => {
   let startCursor = undefined;
   let hasMore = true;
   const results = [];

@@ -12,7 +12,8 @@ import { truncateString } from "@/lib/helpers";
 export default function Page({ data }) {
   const router = useRouter();
   const { slug } = router.query;
-  const pageContent = data.projects.filter(page => slug === page.slug)[0];
+  // const pageContent = data.projects.filter(page => slug === page.slug)[0];
+  const pageContent = data;
 
   const cover = pageContent.cover.url && <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full shadow-2xl" />;
 
@@ -76,12 +77,12 @@ export default function Page({ data }) {
 }
 
 export const getStaticPaths = async () => {
-  const response = await fetch(process.env.NEXT_NOTION_API_URL);
+  const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/listProjects`);
   if (!response.ok) {
     throw new Error(`Network response was not ok - ${response.statusText}`);
   }
   const data = await response.json();
-  const paths = data.projects.map(item => ({
+  const paths = data.map(item => ({
     params: { slug: item.slug },
   }));
   return {
@@ -90,9 +91,9 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async () => {
+export const getStaticProps = async ({ params }) => {
   try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
+    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/page/${params.slug}`);
     if (!response.ok) {
       throw new Error(`Network response was not ok - ${response.statusText}`);
     }
@@ -102,7 +103,7 @@ export const getStaticProps = async () => {
       props: {
         data,
       },
-      revalidate: 1800, // Re-generate the page every 1 hour
+      revalidate: 1800,
     };
   } catch (error) {
     console.error("Error fetching data:", error);
