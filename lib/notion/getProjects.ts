@@ -11,9 +11,15 @@ const filter = {
 
 export const getProjects = async () => {
   try {
+    // 1
+    // const allChildBlocks = await getChildBlocks(livePages);
+
+    // 3
     const result = await getDatabase(database, filter);
     const livePages = result.filter(page => page.properties.Decision?.select?.name === "Include");
-    const allChildBlocks = await getChildBlocks(livePages);
+    // Fetch child blocks for all live pages in parallel
+    const allChildBlocksPromises = livePages.map(page => getChildBlocks([page]));
+    const allChildBlocksResults = await Promise.all(allChildBlocksPromises);
 
     const transformPage = (page, childBlocks) => {
       const { Decision, Brand, Date, Industry, Name, Position, Slug, Technologies, Logo, URL } = page.properties;
@@ -53,7 +59,10 @@ export const getProjects = async () => {
         }),
       };
     };
-    const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocks[i]));
+
+    // 3
+    // Now, allChildBlocksResults is an array of arrays, so we use allChildBlocksResults[i][0] to get the child blocks for each page
+    const transformedPages = livePages.map((page, i) => transformPage(page, allChildBlocksResults[i][0]));
 
     // Filter and sort pages
     const sortedPages = transformedPages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
