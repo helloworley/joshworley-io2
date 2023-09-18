@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import cache from "memory-cache";
 import { getProjects } from "@/pages/api/notion/getProjects";
 // import { getTechnologies } from "@/pages/api/notion/getTechnologies";
-import { getPhotography } from "@/pages/api/notion/getPhotography";
+// import { getPhotography } from "@/pages/api/notion/getPhotography";
 import { getSinglePages } from "@/pages/api/notion/getSinglePages";
 import { getEducation } from "@/pages/api/notion/getEducation";
 import { RateLimit } from "async-sema";
@@ -80,18 +80,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
   }
 
   try {
-    const [projects, photography, singlePages, education] = await Promise.all([
-      getProjects(),
-      // getTechnologies(),
-      getPhotography(),
-      getSinglePages(),
-      getEducation(),
-    ]);
+    const [projects, singlePages, education] = await Promise.all([getProjects(), getSinglePages(), getEducation()]);
 
     cachedData = {
       projects,
-      // technologies,
-      photography,
+      // photography,
       singlePages,
       education,
     };

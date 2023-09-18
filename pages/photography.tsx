@@ -4,16 +4,18 @@ import ImageCarousel from "@/components/common/ImageCarousel";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 
 export default function Home({ data }) {
+  console.log("data", data);
+  // return;
   return (
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
         <div className="hidden md:block">
-          <ImageCarousel images={data.photography} />
+          <ImageCarousel images={data} />
         </div>
       </SideNavLayout>
       <div className="mt-12 md:hidden">
-        {data.photography.map(photo => (
+        {data.map(photo => (
           <NotionPropertyImage
             key={photo.name}
             image={photo.image}
@@ -33,7 +35,7 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/notion`);
+    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/getPhotography`);
     if (!response.ok) {
       throw new Error(`Network response was not ok - ${response.statusText}`);
     }
