@@ -34,6 +34,7 @@ export default async (req, res) => {
 
     res.status(200).json(technologies);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error at getTechnologies" });
   }
 };
