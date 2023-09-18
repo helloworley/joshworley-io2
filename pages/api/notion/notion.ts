@@ -2,10 +2,6 @@ import { Client } from "@notionhq/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import cache from "memory-cache";
 import { getProjects } from "@/pages/api/notion/getProjects";
-// import { getTechnologies } from "@/pages/api/notion/getTechnologies";
-// import { getPhotography } from "@/pages/api/notion/getPhotography";
-import { getSinglePages } from "@/pages/api/notion/getSinglePages";
-import { getEducation } from "@/pages/api/notion/getEducation";
 import { RateLimit } from "async-sema";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
@@ -80,13 +76,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
   }
 
   try {
-    const [projects, singlePages, education] = await Promise.all([getProjects(), getSinglePages(), getEducation()]);
+    const [projects] = await Promise.all([getProjects()]);
 
     cachedData = {
       projects,
-      // photography,
-      singlePages,
-      education,
     };
 
     cache.put("notionData", cachedData, 1800000); // Cache for 30 min

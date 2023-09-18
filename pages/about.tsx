@@ -7,12 +7,7 @@ import Image from "next/image";
 import Education from "@/components/common/Education";
 import Seo from "@/components/common/Seo";
 
-export default function Home({ data }) {
-  const pageContent = data.singlePages.filter(page => page.slug === "about")[0];
-  const education = data.education;
-
-  // console.log("data", data);
-
+export default function Home({ about, education }) {
   const aside = (
     <div>
       <Image src="/josh-worley.jpg" alt="Josh Worley" width={160} height={160} layout="responsive" className="rounded-xl" />
@@ -22,10 +17,10 @@ export default function Home({ data }) {
   const content = (
     <div className="grid gap-10">
       <div>
-        <p className="text-mist-60 font-sans-serif mb-2">{pageContent.name}</p>
+        <p className="text-mist-60 font-sans-serif mb-2">{about.name}</p>
         <h1 className="text-4xl text-white">Josh Worley</h1>
       </div>
-      <LabelContent label="Overview" content={pageContent.overview} className="lg:mt-1" />
+      <LabelContent label="Overview" content={about.overview} className="lg:mt-1" />
       <Divider />
       <div className="grid gap-8">
         {education.map(item => {
@@ -34,8 +29,8 @@ export default function Home({ data }) {
       </div>
       <Divider />
       <div>
-        {pageContent.childBlocks?.map((block, i) => (
-          <RenderBlock allBlocks={pageContent.childBlocks} block={block} key={i} />
+        {about.childBlocks?.map((block, i) => (
+          <RenderBlock allBlocks={about.childBlocks} block={block} key={i} />
         ))}
       </div>
     </div>
@@ -57,15 +52,22 @@ export default function Home({ data }) {
 export const getStaticProps = async () => {
   try {
     // const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/notion`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok - ${response.statusText}`);
+    const aboutResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getAbout`);
+    if (!aboutResponse.ok) {
+      throw new Error(`Network response was not ok - ${aboutResponse.statusText}`);
     }
-    const data = await response.json();
+    const about = await aboutResponse.json();
+
+    const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
+    if (!educationResponse.ok) {
+      throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
+    }
+    const education = await educationResponse.json();
 
     return {
       props: {
-        data,
+        about,
+        education,
       },
       revalidate: 1800, // Re-generate the page every 1 hour
     };
@@ -74,6 +76,7 @@ export const getStaticProps = async () => {
     return {
       props: {
         data: null,
+        education: null,
       },
     };
   }
