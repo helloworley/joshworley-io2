@@ -36,6 +36,7 @@ export default async (req, res) => {
     }
     res.status(200).json(education);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error at getEducation" });
   }
 };

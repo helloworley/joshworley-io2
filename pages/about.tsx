@@ -59,16 +59,16 @@ export const getStaticProps = async () => {
     // }
     // const about = await aboutResponse.json();
 
-    const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
-    if (!educationResponse.ok) {
-      throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
-    }
-    const education = await educationResponse.json();
+    // const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
+    // if (!educationResponse.ok) {
+    //   throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
+    // }
+    // const education = await educationResponse.json();
 
     return {
       props: {
         // about,
-        education,
+        // education,
       },
       revalidate: 1800, // Re-generate the page every 1 hour
     };
