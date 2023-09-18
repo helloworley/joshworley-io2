@@ -29,6 +29,7 @@ export default async (req, res) => {
         cache.put("technologies", technologies, 1800000); // Cache for 30 minutes
       } else {
         res.status(404).json({ error: "Technologies not found" });
+        return;
       }
     }
 

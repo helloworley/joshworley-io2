@@ -27,6 +27,7 @@ export default async (req, res) => {
         cache.put("photography", photography, 1800000); // Cache for 30 minutes
       } else {
         res.status(404).json({ error: "Photography not found" });
+        return;
       }
     }
     res.status(200).json(photography);
