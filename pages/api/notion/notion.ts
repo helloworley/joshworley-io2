@@ -2,7 +2,7 @@ import { Client } from "@notionhq/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import cache from "memory-cache";
 import { getProjects } from "@/pages/api/notion/getProjects";
-import { getTechnologies } from "@/pages/api/notion/getTechnologies";
+// import { getTechnologies } from "@/pages/api/notion/getTechnologies";
 import { getPhotography } from "@/pages/api/notion/getPhotography";
 import { getSinglePages } from "@/pages/api/notion/getSinglePages";
 import { getEducation } from "@/pages/api/notion/getEducation";
@@ -80,9 +80,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
   }
 
   try {
-    const [projects, technologies, photography, singlePages, education] = await Promise.all([
+    const [projects, photography, singlePages, education] = await Promise.all([
       getProjects(),
-      getTechnologies(),
+      // getTechnologies(),
       getPhotography(),
       getSinglePages(),
       getEducation(),
@@ -90,7 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse,
 
     cachedData = {
       projects,
-      technologies,
+      // technologies,
       photography,
       singlePages,
       education,
