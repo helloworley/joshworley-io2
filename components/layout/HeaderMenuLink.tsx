@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function HeaderMenuLink({ name, link, className }: { name: string; link: string; className?: string }) {
   const { clear } = useSkrimContext();
   const router = useRouter();
-  const isActive = router.pathname.includes(link);
+  const isActive = router.pathname === link;
 
   return (
     <li className="list-none">

@@ -1,19 +1,5 @@
 import HeaderMenuLink from "@/components/layout/HeaderMenuLink";
-
-export const navItems = [
-  {
-    name: "Design & Development",
-    link: "/design-and-development",
-  },
-  {
-    link: "/photography",
-    name: "Photography",
-  },
-  {
-    link: "/technologies",
-    name: "Technologies",
-  },
-];
+import { menuItemsData } from "../layout/Header";
 
 export default function Header({ className }: { className?: string }) {
   return (
@@ -26,7 +12,7 @@ export default function Header({ className }: { className?: string }) {
       ].join(" ")}
     >
       <div className="flex gap-6 px-4 py-4 lg:h-full lg:flex-col lg:justify-center lg:px-10">
-        {navItems.map(item => (
+        {menuItemsData.map(item => (
           <div className="group" key={item.name}>
             <HeaderMenuLink {...item} key={item.name} />
           </div>

@@ -15,7 +15,7 @@ export function _Loader({ size, className }: { size: number; className?: string 
 }
 
 const LoadingAnimation = (props: LoadingAnimationProps) => {
-  const { className, minHeight = "min-h-[400px]" } = props; // padding defaults to 88
+  const { className, minHeight } = props; // padding defaults to 88
   // const _minHeight = `min-h-[${minHeight}px]`;
   return (
     <div className={[`grid h-full w-full flex-grow place-items-center`, minHeight, className].join(" ")}>

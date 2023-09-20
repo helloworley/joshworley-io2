@@ -1,5 +1,4 @@
 import Link from "next/link";
-import HeaderMenuItems from "./HeaderMenuItems";
 import MobileNavDrawer from "./MobileNavDrawer";
 import MobileMenuDrawerToggle from "./MobileMenuDrawerToggle";
 import Image from "next/image";
@@ -25,6 +24,10 @@ export const socials = [
 ];
 
 export const menuItemsData = [
+  {
+    name: "Ikigai",
+    link: "/",
+  },
   {
     name: "Design & Development",
     link: "/design-and-development",
@@ -70,9 +73,6 @@ export default function Header() {
                   </a>
                 );
               })}
-            </div>
-            <div className="hidden lg:inline-block">
-              <HeaderMenuItems />
             </div>
             <MobileMenuDrawerToggle nav={<MobileNavDrawer menuItems={menuItemsData} />} />
           </div>
