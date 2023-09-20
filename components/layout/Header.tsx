@@ -4,6 +4,7 @@ import MobileMenuDrawerToggle from "./MobileMenuDrawerToggle";
 import Image from "next/image";
 
 import { LinkedIn, Twitter, Github } from "../common/SocialIcons";
+import HeaderMenuItems from "./HeaderMenuItems";
 
 export const socials = [
   {
@@ -27,14 +28,17 @@ export const menuItemsData = [
   {
     name: "Ikigai",
     link: "/",
+    showOnDesktop: true,
   },
   {
     name: "Design & Development",
     link: "/design-and-development",
+    showOnDesktop: true,
   },
   {
     name: "Photography",
     link: "/photography",
+    showOnDesktop: true,
   },
   {
     name: "Technologies",
@@ -64,6 +68,10 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex items-center gap-1 lg:gap-4">
+            <div className="hidden lg:block">
+              <HeaderMenuItems />
+            </div>
+
             <div className="flex items-center gap-3">
               {socials.map(social => {
                 return (
