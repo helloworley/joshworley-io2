@@ -1,11 +1,8 @@
-import fs from "fs";
-import { PAGES_CACHE_PATH } from "@/pages/api/notion";
+import cache from "memory-cache";
 
 let queue = [];
 let isRunning = false;
 
-// create a queue for ensuring requests are handled synchronously
-// for example, if 10 requests come to rewriteCacheUrl, cache will be rewritten 10 times in order
 const processQueue = async () => {
   if (queue.length === 0 || isRunning) {
     return;
@@ -16,46 +13,37 @@ const processQueue = async () => {
   await rewriteCacheUrl(pageId, propertyId, cacheCategory, cacheProperty, newUrl);
   console.log(pageId, "finished");
   isRunning = false;
-  // Process the next item in the queue
   processQueue();
 };
 
-// rewrite a single url to the cache
 const rewriteCacheUrl = async (pageId: string, propertyId: string, cacheCategory: string, cacheProperty: string, newUrl: string) => {
   console.log("try rewriting url");
 
-  // if it's a notion property image
+  const cachedData = cache.get("notionData") || {};
+
   if (propertyId) {
-    // load the cached data
-    let cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
-    // find the specific entry in the cacheCategory array
-    const entry = cachedData[cacheCategory].find(item => item[cacheProperty].pageId === pageId && item[cacheProperty].propertyId === propertyId);
-    // update the URL if the entry is found
-    if (entry && entry[cacheProperty]) {
-      entry[cacheProperty].url = newUrl;
+    const categoryData = cachedData[cacheCategory] || [];
+    const entryIndex = categoryData.findIndex(item => item[cacheProperty]?.pageId === pageId && item[cacheProperty]?.propertyId === propertyId);
+
+    if (entryIndex !== -1) {
+      categoryData[entryIndex][cacheProperty].url = newUrl;
+      cachedData[cacheCategory] = categoryData;
     } else {
       console.error(`Entry with pageId: ${pageId} and propertyId: ${propertyId} not found.`);
       return;
     }
-    // save the updated data back to the PAGES_CACHE_PATH file
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
-
-    // else if it's a page cover image
   } else {
-    // load the cached data
-    let cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
-    // find the specific entry in the cacheCategory array
-    const entry = cachedData[cacheCategory].find(item => item.pageId === pageId);
-    // update the URL if the entry is found
-    if (entry) {
-      entry.cover.url = newUrl;
+    const entryIndex = cachedData[cacheCategory]?.findIndex(item => item.pageId === pageId);
+
+    if (entryIndex !== -1) {
+      cachedData[cacheCategory][entryIndex].cover.url = newUrl;
     } else {
       console.error(`Entry with pageId: ${pageId} not found.`);
       return;
     }
-    // save the updated data back to the PAGES_CACHE_PATH file
-    fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
   }
+
+  cache.put("notionData", cachedData, 3600000); // Cache for 1 hour
 
   console.log("url rewrote");
 };
