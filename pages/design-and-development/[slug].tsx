@@ -14,6 +14,8 @@ export default function Page({ data }) {
   const { slug } = router.query;
   const pageContent = data.projects.filter(page => slug === page.slug)[0];
 
+  console.log("data", data);
+
   const cover = pageContent.cover.url && (
     <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full rounded-xl shadow-2xl" />
   );
