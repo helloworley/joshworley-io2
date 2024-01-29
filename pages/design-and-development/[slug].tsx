@@ -77,27 +77,15 @@ export default function Page({ data }) {
 }
 
 export const getStaticPaths = async () => {
-  try {
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/listProjects`);
-    if (!response.ok) {
-      console.error("Response status:", response.status);
-      console.error("Response text:", await response.text());
-      throw new Error(`Network response was not ok - ${response.statusText}`);
-    }
-    const data = await response.json();
-    const paths = data
-      .filter(item => item.slug && item.slug !== "design-and-development")
-      .map(item => ({
-        params: { slug: item.slug },
-      }));
-    return {
-      paths,
-      fallback: false,
-    };
-  } catch (error) {
-    console.error("Error fetching data in getStaticPaths:", error);
-    throw error; // Re-throw the error after logging it
-  }
+  const response = await fetch(process.env.NEXT_NOTION_API_URL);
+  const data = await response.json();
+  const paths = data.projects.map(item => ({
+    params: { slug: item.slug },
+  }));
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export const getStaticProps = async () => {
