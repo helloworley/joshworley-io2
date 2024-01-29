@@ -32,25 +32,26 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ images }) => {
             alt={photo.name}
             cacheCategory="photography-thumbnails"
             cacheProperty="image"
-            width={50} // Adjust as per your requirement for thumbnails
-            height={50} // Adjust as per your requirement for thumbnails
+            width={40} // Adjust as per your requirement for thumbnails
+            height={40} // Adjust as per your requirement for thumbnails
             className=""
           />
         ))
       }
     >
       {images.map((photo, i) => (
-        <div className="flex h-screen w-auto items-center justify-center" key={i}>
+        <div
+          className="flex h-[calc(100vh-160px)] w-auto items-center justify-center"
+          key={i}
+          style={{ maxHeight: "calc(100vh - 10px)" }} // Inline style for height
+        >
           <NotionPropertyImage
             key={photo.name}
             image={photo.image}
             alt={photo.name}
             cacheCategory="photography"
             cacheProperty="image"
-            // onImageLoad={handleImageLoad}
-            width={400} // Adjust width as per your requirement
-            height={400} // Adjust height as per your requirement
-            className="max-w-screen mx-auto max-h-screen" // This will prevent the images from shrinking
+            className="max-w-screen mx-auto max-h-[calc(100vh-160px)] object-contain" // Using object-contain to maintain aspect ratio
           />
         </div>
       ))}
