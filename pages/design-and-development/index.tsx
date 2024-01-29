@@ -12,7 +12,7 @@ export default function Page({ data }) {
         title="Design & Development"
         description="A collection of projects that Josh has designed and developed throughout the years. Select a project to learn more about the project goal, design, and implementation."
       />
-      <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:gap-8">
+      <div className="mt-8 grid gap-5 md:grid-cols-2 lg:gap-4 xl:gap-8 2xl:grid-cols-3">
         {data.projects?.map(project => {
           return <ProjectCard project={project} key={project.name} />;
         })}

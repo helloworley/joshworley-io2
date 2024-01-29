@@ -17,9 +17,7 @@ export default function Page({ data }) {
 
   console.log("data", data);
 
-  const cover = pageContent.cover.url && (
-    <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full rounded-xl shadow-2xl" />
-  );
+  const cover = pageContent.cover.url && <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full" />;
 
   const aside = (
     <div className="grid grid-cols-[160px_1fr] gap-8 lg:block">
