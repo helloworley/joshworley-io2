@@ -1,4 +1,4 @@
-import { getDatabase } from "@/pages/api/notion/notion";
+import { getDatabase } from "@/pages/api/notion";
 export const database = process.env.NOTION_PROJECTS_DATABASE;
 // import { getChildBlocks } from "./getChildBlocks";
 

@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { notionClient } from "@/pages/api/notion/notion";
+import { notionClient } from "@/pages/api/notion";
 import { ImageBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
 // refetches the image source for block images (inside a page's content)

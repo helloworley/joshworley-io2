@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { notionClient } from "@/pages/api/notion/notion";
+import { notionClient } from "@/pages/api/notion";
 import { enqueueRewrite } from "@/pages/api/notion/refetch/rewriteCacheUrl";
 
 export const getCoverImageSrc = async (pageId: string, cacheCategory: string): Promise<string[]> => {

@@ -1,6 +1,6 @@
 // pages/api/page/[slug].tsx
-import { getDatabase } from "@/pages/api/notion/notion";
-import { getChildBlocks } from "@/pages/api/notion/getChildBlocks"; // Import the getChildBlocks function
+import { getDatabase } from "@/pages/api/notion";
+import { getChildBlocks } from "@/pages/api/getChildBlocks"; // Import the getChildBlocks function
 export const database = process.env.NOTION_PROJECTS_DATABASE;
 
 const transformPage = (page, childBlocks) => {

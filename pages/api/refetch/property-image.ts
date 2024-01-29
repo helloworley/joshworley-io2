@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { notionClient } from "@/pages/api/notion/notion";
+import { notionClient } from "@/pages/api/notion";
 import { enqueueRewrite } from "@/pages/api/notion/refetch/rewriteCacheUrl";
 
 // refetches the image source for property images (inside a page's properties)

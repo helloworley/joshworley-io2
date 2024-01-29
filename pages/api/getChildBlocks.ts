@@ -1,4 +1,4 @@
-import { notionClient, rateLimiter, fetchDataWithRetry } from "@/pages/api/notion/notion";
+import { notionClient, rateLimiter, fetchDataWithRetry } from "@/pages/api/notion";
 
 const fetchChildBlocks = async (blockId: string, level = 0) => {
   console.log(`Fetching child blocks of ${blockId} at level ${level}`);
