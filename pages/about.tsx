@@ -7,7 +7,9 @@ import Image from "next/image";
 import Education from "@/components/common/Education";
 import Seo from "@/components/common/Seo";
 
-export default function Home({ about, education }) {
+export default function Home({ data }) {
+  const about = data.singlePages.filter(page => page.name === "About")[0];
+
   const aside = (
     <div>
       <Image src="/josh-worley.jpg" alt="Josh Worley" width={160} height={160} layout="responsive" className="rounded-xl" />
@@ -23,7 +25,7 @@ export default function Home({ about, education }) {
       <LabelContent label="Overview" content={about.overview} className="lg:mt-1" />
       <Divider />
       <div className="grid gap-8">
-        {education.map(item => {
+        {data.education.map(item => {
           return <Education education={item} key={item.name} />;
         })}
       </div>
@@ -68,36 +70,3 @@ export const getStaticProps = async () => {
     };
   }
 };
-
-// export const getStaticProps = async () => {
-//   try {
-//     // const response = await fetch(process.env.NEXT_NOTION_API_URL);
-//     const aboutResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getAbout`);
-//     if (!aboutResponse.ok) {
-//       throw new Error(`Network response was not ok - ${aboutResponse.statusText}`);
-//     }
-//     const about = await aboutResponse.json();
-
-//     const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
-//     if (!educationResponse.ok) {
-//       throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
-//     }
-//     const education = await educationResponse.json();
-
-//     return {
-//       props: {
-//         about,
-//         education,
-//       },
-//       revalidate: 1800, // Re-generate the page every 1 hour
-//     };
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     return {
-//       props: {
-//         data: null,
-//         education: null,
-//       },
-//     };
-//   }
-// };

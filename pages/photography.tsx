@@ -11,11 +11,11 @@ export default function Home({ data }) {
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
         <div className="hidden md:block">
-          <ImageCarousel images={data} />
+          <ImageCarousel images={data.photography} />
         </div>
       </SideNavLayout>
       <div className="mt-12 md:hidden">
-        {data.map(photo => (
+        {data.photography.map(photo => (
           <NotionPropertyImage
             key={photo.name}
             image={photo.image}
@@ -35,17 +35,13 @@ export default function Home({ data }) {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/getPhotography`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok - ${response.statusText}`);
-    }
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
-
     return {
       props: {
         data,
       },
-      revalidate: 1800, // Re-generate the page every 1 hour
+      revalidate: 3600, // Re-generate the page every 1 hour
     };
   } catch (error) {
     console.error("Error fetching data:", error);

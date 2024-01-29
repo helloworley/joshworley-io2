@@ -43,6 +43,7 @@ export const menuItemsData = [
   {
     name: "Technologies",
     link: "/technologies",
+    showOnDesktop: true,
   },
   {
     name: "About",

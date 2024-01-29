@@ -12,7 +12,7 @@ export default function Page({ data }) {
         description="Josh has years of professional experience and working knowledge of the following design applications and frontend technologies."
       />
       <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {data?.map(tech => {
+        {data?.technologies?.map(tech => {
           return <Technology tech={tech} key={tech.name} />;
         })}
       </div>
@@ -34,17 +34,13 @@ export default function Page({ data }) {
 
 export const getStaticProps = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/getTechnologies`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok - ${response.statusText}`);
-    }
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
-
     return {
       props: {
         data,
       },
-      revalidate: 1800, // Re-generate the page every 1 hour
+      revalidate: 3600, // Re-generate the page every 1 hour
     };
   } catch (error) {
     console.error("Error fetching data:", error);

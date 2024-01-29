@@ -100,19 +100,15 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async () => {
   try {
-    const response = await fetch(`${process.env.NEXT_NOTION_API_URL}/page/${params.slug}`);
-    if (!response.ok) {
-      throw new Error(`Network response was not ok - ${response.statusText}`);
-    }
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
     const data = await response.json();
-
     return {
       props: {
         data,
       },
-      revalidate: 1800,
+      revalidate: 3600, // Re-generate the page every 1 hour
     };
   } catch (error) {
     console.error("Error fetching data:", error);

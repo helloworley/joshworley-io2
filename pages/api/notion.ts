@@ -7,6 +7,8 @@ import { getTechnologies } from "./getTechnologies";
 import { getPhotography } from "./getPhotography";
 import { getSinglePages } from "./getSinglePages";
 import { getEducation } from "./getEducation";
+import { NextApiRequest, NextApiResponse } from "next";
+import cache from "memory-cache";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
 export const database2 = process.env.NOTION_TECHNOLOGIES_DATABASE;
@@ -89,4 +91,34 @@ export async function getAllEntries() {
   console.log("cachedData", cachedData);
 
   return cachedData;
+}
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  let cachedData = cache.get("notionData");
+  console.log("handling");
+  if (cachedData) {
+    return res.status(200).json(cachedData);
+  }
+
+  try {
+    const projects = await getProjects();
+    const technologies = await getTechnologies();
+    const photography = await getPhotography();
+    const singlePages = await getSinglePages();
+    const education = await getEducation();
+
+    cachedData = {
+      projects,
+      technologies,
+      photography,
+      singlePages,
+      education,
+    };
+
+    cache.put("notionData", cachedData, 3600000); // Cache for 1 hour
+    res.status(200).json(cachedData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
 }
