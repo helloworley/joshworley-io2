@@ -51,33 +51,53 @@ export default function Home({ about, education }) {
 
 export const getStaticProps = async () => {
   try {
-    // const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const aboutResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getAbout`);
-    if (!aboutResponse.ok) {
-      throw new Error(`Network response was not ok - ${aboutResponse.statusText}`);
-    }
-    const about = await aboutResponse.json();
-
-    const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
-    if (!educationResponse.ok) {
-      throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
-    }
-    const education = await educationResponse.json();
-
+    const response = await fetch(process.env.NEXT_NOTION_API_URL);
+    const data = await response.json();
     return {
       props: {
-        about,
-        education,
+        data,
       },
-      revalidate: 1800, // Re-generate the page every 1 hour
+      revalidate: 3600, // Re-generate the page every 1 hour
     };
   } catch (error) {
     console.error("Error fetching data:", error);
     return {
       props: {
         data: null,
-        education: null,
       },
     };
   }
 };
+
+// export const getStaticProps = async () => {
+//   try {
+//     // const response = await fetch(process.env.NEXT_NOTION_API_URL);
+//     const aboutResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getAbout`);
+//     if (!aboutResponse.ok) {
+//       throw new Error(`Network response was not ok - ${aboutResponse.statusText}`);
+//     }
+//     const about = await aboutResponse.json();
+
+//     const educationResponse = await fetch(`${process.env.NEXT_NOTION_API_URL}/getEducation`);
+//     if (!educationResponse.ok) {
+//       throw new Error(`Network response for getEducation was not ok - ${educationResponse.statusText}`);
+//     }
+//     const education = await educationResponse.json();
+
+//     return {
+//       props: {
+//         about,
+//         education,
+//       },
+//       revalidate: 1800, // Re-generate the page every 1 hour
+//     };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: {
+//         data: null,
+//         education: null,
+//       },
+//     };
+//   }
+// };
