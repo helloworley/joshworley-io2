@@ -15,7 +15,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </Head>
       <div className="bg-gray-1200 bottom-0 mb-0">
         <div className="">
-          <Header />
+          <Header className="lg:hidden" />
           <div>{children}</div>
         </div>
       </div>
