@@ -12,8 +12,7 @@ import { truncateString } from "@/lib/helpers";
 export default function Page({ data }) {
   const router = useRouter();
   const { slug } = router.query;
-  // const pageContent = data.projects.filter(page => slug === page.slug)[0];
-  const pageContent = data;
+  const pageContent = data.projects.filter(page => slug === page.slug)[0];
 
   const cover = pageContent.cover.url && <NotionCoverImage image={pageContent.cover} alt={pageContent.name} className="w-full shadow-2xl" />;
 
