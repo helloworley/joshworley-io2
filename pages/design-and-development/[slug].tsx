@@ -8,6 +8,7 @@ import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
 import { NotionCoverImage } from "@/components/image/NotionCoverImage";
 import Seo from "@/components/common/Seo";
 import { truncateString } from "@/lib/helpers";
+import SideNavLayout from "@/components/layout/SideNavLayout";
 
 export default function Page({ data }) {
   const router = useRouter();
@@ -72,9 +73,11 @@ export default function Page({ data }) {
   return (
     <>
       <Seo title={pageContent.name} description={pageContent.project_about} />
-      <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
-        <PageLayout content={content} aside={aside} cover={cover} />
-      </BlurredBackground>
+      <SideNavLayout>
+        <BlurredBackground image={pageContent.logo} bg="bg-smoke-70">
+          <PageLayout content={content} aside={aside} cover={cover} />
+        </BlurredBackground>
+      </SideNavLayout>
     </>
   );
 }

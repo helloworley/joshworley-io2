@@ -3,6 +3,7 @@ import TitleDescription from "@/components/common/TitleDescription";
 import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Seo from "@/components/common/Seo";
+import SideNavLayout from "@/components/layout/SideNavLayout";
 
 export default function Page({ data }) {
   const content = (
@@ -25,9 +26,11 @@ export default function Page({ data }) {
         title="Technologies"
         description="Josh has years of professional experience and working knowledge of the following design applications and frontend technologies."
       />
-      <BlurredBackground image="/default-background.jpeg">
-        <PageLayout content={content} />
-      </BlurredBackground>
+      <SideNavLayout>
+        <BlurredBackground image="/default-background.jpeg">
+          <PageLayout content={content} />
+        </BlurredBackground>
+      </SideNavLayout>
     </>
   );
 }

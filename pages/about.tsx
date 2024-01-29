@@ -6,6 +6,7 @@ import BlurredBackground from "@/components/layout/BlurredBackground";
 import Image from "next/image";
 import Education from "@/components/common/Education";
 import Seo from "@/components/common/Seo";
+import SideNavLayout from "@/components/layout/SideNavLayout";
 
 export default function Home({ data }) {
   const about = data.singlePages.filter(page => page.name === "About")[0];
@@ -44,9 +45,11 @@ export default function Home({ data }) {
         title="About"
         description="About Josh Worley. Josh is a Digital Designer, Frontend Developer, and Digital Producer with nearly a decade of professional experience in Japan and the United States."
       />
-      <BlurredBackground image="/default-background.jpeg">
-        <PageLayout content={content} aside={aside} />
-      </BlurredBackground>
+      <SideNavLayout>
+        <BlurredBackground image="/default-background.jpeg">
+          <PageLayout content={content} aside={aside} />
+        </BlurredBackground>
+      </SideNavLayout>
     </>
   );
 }

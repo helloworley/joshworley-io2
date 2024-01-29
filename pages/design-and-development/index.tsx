@@ -3,6 +3,7 @@ import TitleDescription from "@/components/common/TitleDescription";
 import ProjectCard from "@/components/common/ProjectCard";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Seo from "@/components/common/Seo";
+import SideNavLayout from "@/components/layout/SideNavLayout";
 
 export default function Page({ data }) {
   const content = (
@@ -25,9 +26,11 @@ export default function Page({ data }) {
         title="Design & Development"
         description="A collection of projects that Josh has designed and developed throughout the years. Select a project to learn more about the project goal, design, and implementation."
       />
-      <BlurredBackground image="/default-background.jpeg">
-        <PageLayout content={content} />
-      </BlurredBackground>
+      <SideNavLayout>
+        <BlurredBackground image="/default-background.jpeg">
+          <PageLayout content={content} />
+        </BlurredBackground>
+      </SideNavLayout>
     </>
   );
 }

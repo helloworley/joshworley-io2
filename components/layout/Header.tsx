@@ -26,11 +26,6 @@ export const socials = [
 
 export const menuItemsData = [
   {
-    name: "Ikigai",
-    link: "/",
-    showOnDesktop: true,
-  },
-  {
     name: "Design & Development",
     link: "/design-and-development",
     showOnDesktop: true,
