@@ -1,5 +1,5 @@
 import fs from "fs";
-import { PAGES_CACHE_PATH } from "./notion";
+import { PAGES_CACHE_PATH } from "@/pages/api/notion";
 
 let queue = [];
 let isRunning = false;

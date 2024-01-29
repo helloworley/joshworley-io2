@@ -11,7 +11,7 @@ export const NotionBlockImage: React.FC<{
   const [imageSrc, setImageSrc] = useState(src);
 
   const handleError = async () => {
-    const res = await fetch(`/api/block-image?blockId=${blockId}`).then(res => res.json());
+    const res = await fetch(`/api/refetch/block-image?blockId=${blockId}`).then(res => res.json());
     // TODO: Use Vercel Blob (Joined Waitlist) for storing and serving the files, instead of fething from notion API each time.
     setImageSrc(res.imageSrc);
     setIsLoading(false);
