@@ -1,13 +1,19 @@
 import { Client } from "@notionhq/client";
-import { NextApiRequest, NextApiResponse } from "next";
-import cache from "memory-cache";
-import { getProjects } from "@/pages/api/notion/getProjects";
+import fs from "fs";
+import path from "path";
 import { RateLimit } from "async-sema";
+import { getProjects } from "./getProjects";
+import { getTechnologies } from "./getTechnologies";
+import { getPhotography } from "./getPhotography";
+import { getSinglePages } from "./getSinglePages";
+import { getEducation } from "./getEducation";
 
 export const database1 = process.env.NOTION_PROJECTS_DATABASE;
 export const database2 = process.env.NOTION_TECHNOLOGIES_DATABASE;
 
 export const databases = [database1, database2];
+
+export const PAGES_CACHE_PATH = path.resolve("notionpages.json");
 
 export const notionClient = new Client({
   auth: process.env.NOTION_SECRET,
@@ -31,70 +37,54 @@ export async function fetchDataWithRetry(fn, retries = 3, interval = 1000) {
   }
 }
 
-// interface filterInterface {
-//   property: string;
-//   select: {
-//     equals: string;
-//   };
-//   text: {
-//     equals: string;
-//   };
-// }
-
-export const getDatabase = async (databaseId: string, filter?: any) => {
+export const getDatabase = async databaseId => {
   let startCursor = undefined;
-  let hasMore = true;
-  const results = [];
-  while (hasMore) {
+  let results = [];
+  while (true) {
     await rateLimiter();
     const response = await fetchDataWithRetry(() =>
       notionClient.databases.query({
         database_id: databaseId,
         start_cursor: startCursor,
-        filter: filter,
       }),
     );
     results.push(...response.results);
     if (!response.has_more) {
-      hasMore = false;
+      break;
     }
     startCursor = response.next_cursor;
   }
   return results;
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse, callback?: (error?: Error, data?: any) => void) {
-  let cachedData = cache.get("notionData");
-  console.log("handling");
-  if (cachedData) {
-    if (callback) {
-      callback(null, cachedData);
-    } else {
-      res.status(200).json(cachedData);
-    }
-    return;
-  }
+// get all entries from notion on initial load and create a cache in the PAGES_CACHE_PATH
+export async function getAllEntries() {
+  let cachedData;
 
   try {
-    const [projects] = await Promise.all([getProjects()]);
-
-    cachedData = {
-      projects,
-    };
-
-    cache.put("notionData", cachedData, 1800000); // Cache for 30 min
-
-    if (callback) {
-      callback(null, cachedData);
-    } else {
-      res.status(200).json(cachedData);
-    }
+    cachedData = JSON.parse(fs.readFileSync(PAGES_CACHE_PATH, "utf8"));
   } catch (error) {
-    console.error(error);
-    if (callback) {
-      callback(error);
-    } else {
-      res.status(500).json({ error: error.message });
-    }
+    console.log("Notion Pages cache not initialized. Pages will be fetched now. It may take up to 10 minutes");
   }
+
+  // if (!cachedData) {
+  const projects = JSON.parse(JSON.stringify(await getProjects()));
+  const technologies = JSON.parse(JSON.stringify(await getTechnologies()));
+  const photography = JSON.parse(JSON.stringify(await getPhotography()));
+  const singlePages = JSON.parse(JSON.stringify(await getSinglePages()));
+  const education = JSON.parse(JSON.stringify(await getEducation()));
+  cachedData = {
+    projects: projects,
+    technologies: technologies,
+    photography: photography,
+    singlePages: singlePages,
+    education: education,
+  };
+
+  // Write the fetched data to the notionpages.json file
+  fs.writeFileSync(PAGES_CACHE_PATH, JSON.stringify(cachedData, null, 2));
+  // }
+  console.log("cachedData", cachedData);
+
+  return cachedData;
 }
