@@ -1,6 +1,6 @@
 import cache from "memory-cache";
 
-let queue = [];
+const queue = [];
 let isRunning = false;
 
 const processQueue = async () => {
