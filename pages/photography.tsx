@@ -32,7 +32,6 @@ export default function Home({ photography }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const photography = await fetchContent("photography");
-
   return {
     props: {
       photography,
