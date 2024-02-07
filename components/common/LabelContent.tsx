@@ -1,6 +1,16 @@
 import React from "react";
 
-export default function LabelContent({ label, content, className }: { label: string; content: any[] | string | JSX.Element; className?: string }) {
+export default function LabelContent({
+  label,
+  content,
+  relation,
+  className,
+}: {
+  label: string;
+  content?: string | JSX.Element;
+  className?: string;
+  relation?: { data: any[] };
+}) {
   const renderContent = () => {
     if (typeof content === "string") {
       return <p className="text-white">{content}</p>;
@@ -21,10 +31,20 @@ export default function LabelContent({ label, content, className }: { label: str
     return null;
   };
 
+  console.log("relation", relation);
+
   return (
     <div className={className}>
       <p className="text-mist-60 font-sans-serif mb-2">{label}</p>
-      <div>{renderContent()}</div>
+      {relation ? (
+        <>
+          {relation?.data.map(item => {
+            return <p className="text-white">{item.attributes.name}</p>;
+          })}
+        </>
+      ) : (
+        <div>{renderContent()}</div>
+      )}
     </div>
   );
 }

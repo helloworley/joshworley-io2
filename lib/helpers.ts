@@ -55,3 +55,16 @@ export function shuffleArray(array) {
   }
   return array;
 }
+
+interface ItemWithDate {
+  date: string;
+  [key: string]: any; // This allows the object to have other properties as well
+}
+
+export function orderByDate(array: ItemWithDate[], order: "asc" | "desc" = "desc"): ItemWithDate[] {
+  return array.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return order === "asc" ? dateA - dateB : dateB - dateA;
+  });
+}
