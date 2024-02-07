@@ -2,6 +2,7 @@ import StrapiImage from "@/components/common/StrapiImage";
 
 export default function Technology({ tech }) {
   const { name, icon, type, url } = tech;
+  console.log("icon", icon);
   return (
     <div className="flex grid-cols-[64px_1fr] items-center gap-2 md:gap-3">
       <a href={url} target="_blank" rel="noreferrer" className="block h-16 w-16">

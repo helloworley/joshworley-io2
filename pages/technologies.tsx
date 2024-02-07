@@ -1,11 +1,11 @@
+import { GetStaticProps } from "next";
+import fetchContent from "@/lib/strapi/fetchContent";
 import PageLayout from "@/components/layout/PageLayout";
 import TitleDescription from "@/components/common/TitleDescription";
 import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Seo from "@/components/common/Seo";
 import SideNavLayout from "@/components/layout/SideNavLayout";
-import { GetStaticProps } from "next";
-import fetchContent from "@/lib/strapi/fetchContent";
 
 export default function Page({ technologies }) {
   const _technologies = technologies.data.map((tech, i) => {

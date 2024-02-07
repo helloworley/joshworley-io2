@@ -3,11 +3,11 @@
 import React, { FC } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { NotionPropertyImage } from "../image/NotionPropertyImage";
-import { NotionPropertyImageTypes } from "../image/NotionPropertyImage";
+import StrapiImage from "@/components/common/StrapiImage";
+import { Media as MediaInterface } from "@/components/common/StrapiImage";
 
 interface ImageCarouselProps {
-  images: { image: NotionPropertyImageTypes; name: string }[];
+  images: MediaInterface[];
 }
 
 const ImageCarousel: FC<ImageCarouselProps> = ({ images }) => {
@@ -20,38 +20,28 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ images }) => {
       emulateTouch={true}
       showThumbs={true}
       showStatus={true}
+      showIndicators={false}
       infiniteLoop={true}
       autoPlay={true}
-      interval={5000} // 5 seconds between transitions
-      transitionTime={500} // Half a second transition time
+      interval={3000} // 5 seconds between transitions
+      transitionTime={250} // Half a second transition time
       renderThumbs={() =>
         images.map((photo, i) => (
-          <NotionPropertyImage
-            key={i}
-            image={photo.image}
-            alt={photo.name}
-            cacheCategory="photography-thumbnails"
-            cacheProperty="image"
-            width={40} // Adjust as per your requirement for thumbnails
-            height={40} // Adjust as per your requirement for thumbnails
-            className=""
-          />
+          <div className="h-[48px]">
+            <StrapiImage key={i} {...photo} />
+          </div>
         ))
       }
     >
       {images.map((photo, i) => (
         <div
-          className="flex h-[calc(100vh-160px)] w-auto items-center justify-center"
+          className="flex h-[calc(100vh-80px)] w-auto items-center justify-center"
           key={i}
           style={{ maxHeight: "calc(100vh - 10px)" }} // Inline style for height
         >
-          <NotionPropertyImage
-            key={photo.name}
-            image={photo.image}
-            alt={photo.name}
-            cacheCategory="photography"
-            cacheProperty="image"
-            className="max-w-screen mx-auto max-h-[calc(100vh-160px)] object-contain" // Using object-contain to maintain aspect ratio
+          <StrapiImage
+            {...photo}
+            className="max-w-screen mx-auto max-h-[calc(100vh-80px)] object-contain" // Using object-contain to maintain aspect ratio
           />
         </div>
       ))}

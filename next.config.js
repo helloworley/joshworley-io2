@@ -12,7 +12,7 @@ const nextConfig = {
     },
   },
   images: {
-    domains: ["joshworley.io"],
+    domains: ["joshworley.io", "joshworley-io-strapi.sfo3.digitaloceanspaces.com"],
   },
   webpack(config) {
     config.module.rules.push({
