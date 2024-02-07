@@ -22,8 +22,8 @@ export default function Home({ photography }) {
         </div>
       </SideNavLayout>
       <div className="mt-12 md:hidden">
-        {shuffledPhotography.map(photo => (
-          <StrapiImage {...photo} />
+        {shuffledPhotography.map((photo, i) => (
+          <StrapiImage {...photo} key={i} />
         ))}
       </div>
     </>

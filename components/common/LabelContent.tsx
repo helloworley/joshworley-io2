@@ -36,8 +36,12 @@ export default function LabelContent({
       <p className="text-mist-60 font-sans-serif mb-2">{label}</p>
       {relation ? (
         <>
-          {relation?.data.map(item => {
-            return <p className="text-white">{item.attributes.name}</p>;
+          {relation?.data.map((item, i) => {
+            return (
+              <p className="text-white" key={i}>
+                {item.attributes.name}
+              </p>
+            );
           })}
         </>
       ) : (

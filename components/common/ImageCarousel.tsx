@@ -27,7 +27,7 @@ const ImageCarousel: FC<ImageCarouselProps> = ({ images }) => {
       transitionTime={250} // Half a second transition time
       renderThumbs={() =>
         images.map((photo, i) => (
-          <div className="h-[48px]">
+          <div className="h-[48px]" key={i}>
             <StrapiImage key={i} {...photo} />
           </div>
         ))
