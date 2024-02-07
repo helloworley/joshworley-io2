@@ -3,7 +3,6 @@ import fetchContent from "@/lib/strapi/fetchContent";
 import PageLayout from "@/components/layout/PageLayout";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
-import RenderBlock from "@/components/common/RenderBlock";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Image from "next/image";
 import Education from "@/components/common/Education";
@@ -41,11 +40,6 @@ export default function Home({ about, educations }) {
       <Divider />
       <div>
         <BlockRendererClient content={content} textClasses="max-w-[640px]" />
-      </div>
-      <div>
-        {about.childBlocks?.map((block, i) => (
-          <RenderBlock allBlocks={about.childBlocks} block={block} key={i} />
-        ))}
       </div>
     </div>
   );
