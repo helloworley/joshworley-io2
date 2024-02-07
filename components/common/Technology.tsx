@@ -1,19 +1,15 @@
-import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
+import StrapiImage from "@/components/common/StrapiImage";
 
 export default function Technology({ tech }) {
   const { name, icon, type, url } = tech;
   return (
     <div className="flex grid-cols-[64px_1fr] items-center gap-2 md:gap-3">
       <a href={url} target="_blank" rel="noreferrer" className="block h-16 w-16">
-        <NotionPropertyImage alt={tech.name} image={icon} width={64} height={64} cacheCategory="technologies" cacheProperty="icon" />
+        <StrapiImage {...icon.data} />
       </a>
-      <div>
+      <div className="flex flex-col gap-0">
         <p className="text-white">{name}</p>
-        {type.map((item, i) => (
-          <p key={i} className="text-mist-60 font-sans-serif">
-            {item}
-          </p>
-        ))}
+        <p className="text-mist-40 font-sans-serif text-sm">{type}</p>
       </div>
     </div>
   );

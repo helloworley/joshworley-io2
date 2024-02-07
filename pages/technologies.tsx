@@ -4,8 +4,14 @@ import Technology from "@/components/common/Technology";
 import BlurredBackground from "@/components/layout/BlurredBackground";
 import Seo from "@/components/common/Seo";
 import SideNavLayout from "@/components/layout/SideNavLayout";
+import { GetStaticProps } from "next";
+import fetchContent from "@/lib/strapi/fetchContent";
 
-export default function Page({ data }) {
+export default function Page({ technologies }) {
+  const _technologies = technologies.data.map((tech, i) => {
+    const { name, type, url, icon } = tech.attributes;
+    return { name, type, url, icon };
+  });
   const content = (
     <>
       <TitleDescription
@@ -13,7 +19,7 @@ export default function Page({ data }) {
         description="Josh has years of professional experience and working knowledge of the following design applications and frontend technologies."
       />
       <div className="mt-10 grid grid-cols-2 gap-3 gap-y-8 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {data?.technologies?.map(tech => {
+        {_technologies?.map(tech => {
           return <Technology tech={tech} key={tech.name} />;
         })}
       </div>
@@ -35,22 +41,12 @@ export default function Page({ data }) {
   );
 }
 
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const data = await response.json();
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
+export const getStaticProps: GetStaticProps = async () => {
+  const technologies = await fetchContent("technologies");
+
+  return {
+    props: {
+      technologies,
+    },
+  };
 };

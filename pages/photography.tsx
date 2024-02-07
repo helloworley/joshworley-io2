@@ -2,6 +2,8 @@ import SideNavLayout from "@/components/layout/SideNavLayout";
 import Seo from "@/components/common/Seo";
 import ImageCarousel from "@/components/common/ImageCarousel";
 import { NotionPropertyImage } from "@/components/image/NotionPropertyImage";
+import { GetStaticProps } from "next";
+import fetchContent from "@/lib/strapi/fetchContent";
 
 export default function Home({ data }) {
   console.log("data", data);
@@ -10,11 +12,9 @@ export default function Home({ data }) {
     <>
       <Seo title="Photography" description="Some photos from Josh's photography portfolio throughout the years." />
       <SideNavLayout>
-        <div className="hidden md:block">
-          <ImageCarousel images={data.photography} />
-        </div>
+        <div className="hidden md:block">{/* <ImageCarousel images={data.photography} /> */}</div>
       </SideNavLayout>
-      <div className="mt-12 md:hidden">
+      {/* <div className="mt-12 md:hidden">
         {data.photography.map(photo => (
           <NotionPropertyImage
             key={photo.name}
@@ -28,27 +28,37 @@ export default function Home({ data }) {
             className="max-w-screen mx-auto max-h-screen" // This will prevent the images from shrinking
           />
         ))}
-      </div>
+      </div> */}
     </>
   );
 }
 
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const data = await response.json();
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
+// export const getStaticProps = async () => {
+//   try {
+//     const response = await fetch(process.env.NEXT_NOTION_API_URL);
+//     const data = await response.json();
+//     return {
+//       props: {
+//         data,
+//       },
+//       revalidate: 3600, // Re-generate the page every 1 hour
+//     };
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//     return {
+//       props: {
+//         data: null,
+//       },
+//     };
+//   }
+// };
+
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await fetchContent("photography");
+
+  return {
+    props: {
+      data,
+    },
+  };
 };
