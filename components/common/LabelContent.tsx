@@ -31,8 +31,6 @@ export default function LabelContent({
     return null;
   };
 
-  console.log("relation", relation);
-
   return (
     <div className={className}>
       <p className="text-mist-60 font-sans-serif mb-2">{label}</p>

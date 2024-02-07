@@ -1,3 +1,5 @@
+import { GetStaticProps } from "next";
+import fetchContent from "@/lib/strapi/fetchContent";
 import PageLayout from "@/components/layout/PageLayout";
 import LabelContent from "@/components/common/LabelContent";
 import Divider from "@/components/common/Divider";
@@ -7,9 +9,15 @@ import Image from "next/image";
 import Education from "@/components/common/Education";
 import Seo from "@/components/common/Seo";
 import SideNavLayout from "@/components/layout/SideNavLayout";
+import BlockRendererClient from "@/components/common/BlockRendererClient";
 
-export default function Home({ data }) {
-  const about = data.singlePages.filter(page => page.name === "About")[0];
+export default function Home({ about, educations }) {
+  const { content, overview } = about.data.attributes;
+
+  const _educations = educations.data.map(ed => {
+    const { certification, logo, name, date_display, location } = ed.attributes;
+    return { certification, logo, name, date_display, location };
+  });
 
   const aside = (
     <div>
@@ -17,20 +25,23 @@ export default function Home({ data }) {
     </div>
   );
 
-  const content = (
+  const _content = (
     <div className="grid gap-10">
       <div>
         <p className="text-mist-60 font-sans-serif mb-2">{about.name}</p>
         <h1 className="text-4xl text-white">Josh Worley</h1>
       </div>
-      <LabelContent label="Overview" content={about.overview} className="lg:mt-1" />
+      <LabelContent label="Overview" content={<BlockRendererClient content={overview} textClasses="max-w-[640px]" />} className="mb-10 lg:mt-1" />
       <Divider />
       <div className="grid gap-8">
-        {data.education.map(item => {
+        {_educations.map(item => {
           return <Education education={item} key={item.name} />;
         })}
       </div>
       <Divider />
+      <div>
+        <BlockRendererClient content={content} textClasses="max-w-[640px]" />
+      </div>
       <div>
         {about.childBlocks?.map((block, i) => (
           <RenderBlock allBlocks={about.childBlocks} block={block} key={i} />
@@ -47,29 +58,21 @@ export default function Home({ data }) {
       />
       <SideNavLayout>
         <BlurredBackground image="/default-background.jpeg">
-          <PageLayout content={content} aside={aside} />
+          <PageLayout content={_content} aside={aside} />
         </BlurredBackground>
       </SideNavLayout>
     </>
   );
 }
 
-export const getStaticProps = async () => {
-  try {
-    const response = await fetch(process.env.NEXT_NOTION_API_URL);
-    const data = await response.json();
-    return {
-      props: {
-        data,
-      },
-      revalidate: 3600, // Re-generate the page every 1 hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        data: null,
-      },
-    };
-  }
+export const getStaticProps: GetStaticProps = async () => {
+  const about = await fetchContent("about");
+  const educations = await fetchContent("educations");
+
+  return {
+    props: {
+      about,
+      educations,
+    },
+  };
 };

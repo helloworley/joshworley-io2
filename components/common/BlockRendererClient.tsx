@@ -36,7 +36,7 @@ export default function BlockRendererClient({ content, textClasses }: { readonly
               return <h2>{children}</h2>;
           }
         },
-        paragraph: ({ children }) => <p className={`text-mist-70 ${textClasses}`}>{children}</p>,
+        paragraph: ({ children }) => <p className={`text-mist-70 ${textClasses} mt-2`}>{children}</p>,
       }}
     />
   );

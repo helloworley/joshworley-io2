@@ -3,8 +3,6 @@ import BlurredBackground from "@/components/layout/BlurredBackground";
 import CircleButton from "@/components/common/CircleButton";
 import Ikigai from "@/components/common/Ikigai";
 import Seo from "@/components/common/Seo";
-import { GetStaticProps } from "next";
-import fetchContent from "@/lib/strapi/fetchContent";
 
 const circleButtons = [
   {
@@ -25,8 +23,7 @@ const circleButtons = [
   },
 ];
 
-export default function Home({ page }) {
-  console.log("page", page);
+export default function Home() {
   return (
     <>
       <Seo
@@ -50,13 +47,3 @@ export default function Home({ page }) {
     </>
   );
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const page = await fetchContent("about");
-
-  return {
-    props: {
-      page,
-    },
-  };
-};
