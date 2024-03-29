@@ -27,7 +27,7 @@ export const menuItemsData = [
   },
   {
     name: "Resume",
-    link: "https://drive.google.com/file/d/1fcSVZ3M1go1M1OUeZ8VAQmZk5mKuLvjT/view?usp=sharing",
+    link: "https://drive.google.com/file/d/1NdHYKqOntAZ4_DEfhho9-Kav1vlOj_lo/view?usp=sharing",
     showOnDesktop: true,
   },
 ];
